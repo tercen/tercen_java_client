@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -25,6 +25,10 @@ public class ComputationTaskBase extends CubeQueryTask {
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.ComputationTask_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.parentTaskId = (String) m.get(Vocabulary.parentTaskId_DP);
 		this.fileResultId = (String) m.get(Vocabulary.fileResultId_DP);
+		if (m.get(Vocabulary.computedRelation_OP) == null)
+			this.computedRelation = new Relation();
+		else
+			this.computedRelation = RelationBase.fromJson((LinkedHashMap) m.get(Vocabulary.computedRelation_OP));
 	}
 
 	public static ComputationTask createFromJson(LinkedHashMap m) {

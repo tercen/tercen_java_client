@@ -2,25 +2,38 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class MeltStepBase extends NamespaceStep {
 
 	public MeltStepModel model;
-	public LinkedList<Attribute> meltedAttributes;
+	public ArrayList<Attribute> meltedAttributes;
 
 	public MeltStepBase() {
 		super();
 		this.model = new MeltStepModel();
-		this.meltedAttributes = new LinkedList<Attribute>();
+		this.meltedAttributes = new ArrayList<Attribute>();
 	}
 
 	public MeltStepBase(LinkedHashMap m) {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.MeltStep_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.model_OP) == null)
+			this.model = new MeltStepModel();
+		else
+			this.model = MeltStepModelBase.fromJson((LinkedHashMap) m.get(Vocabulary.model_OP));
+		if (m.get(Vocabulary.meltedAttributes_OP) == null)
+			this.meltedAttributes = new ArrayList<Attribute>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.meltedAttributes_OP);
+			for (Object map : list) {
+				obj_list.add(AttributeBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static MeltStep createFromJson(LinkedHashMap m) {

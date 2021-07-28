@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -14,9 +14,9 @@ public class CubeAxisQueryBase extends BaseObject {
 	public AxisSettings yAxisSettings;
 	public Factor xAxis;
 	public AxisSettings xAxisSettings;
-	public LinkedList<Factor> errors;
-	public LinkedList<Factor> labels;
-	public LinkedList<Factor> colors;
+	public ArrayList<Factor> errors;
+	public ArrayList<Factor> labels;
+	public ArrayList<Factor> colors;
 
 	public CubeAxisQueryBase() {
 		super();
@@ -26,9 +26,9 @@ public class CubeAxisQueryBase extends BaseObject {
 		this.yAxisSettings = new AxisSettings();
 		this.xAxis = new Factor();
 		this.xAxisSettings = new AxisSettings();
-		this.errors = new LinkedList<Factor>();
-		this.labels = new LinkedList<Factor>();
-		this.colors = new LinkedList<Factor>();
+		this.errors = new ArrayList<Factor>();
+		this.labels = new ArrayList<Factor>();
+		this.colors = new ArrayList<Factor>();
 	}
 
 	public CubeAxisQueryBase(LinkedHashMap m) {
@@ -37,6 +37,49 @@ public class CubeAxisQueryBase extends BaseObject {
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.CubeAxisQuery_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.pointSize = (int) m.get(Vocabulary.pointSize_DP);
 		this.chartType = (String) m.get(Vocabulary.chartType_DP);
+		if (m.get(Vocabulary.yAxis_OP) == null)
+			this.yAxis = new Factor();
+		else
+			this.yAxis = FactorBase.fromJson((LinkedHashMap) m.get(Vocabulary.yAxis_OP));
+		if (m.get(Vocabulary.yAxisSettings_OP) == null)
+			this.yAxisSettings = new AxisSettings();
+		else
+			this.yAxisSettings = AxisSettingsBase.fromJson((LinkedHashMap) m.get(Vocabulary.yAxisSettings_OP));
+		if (m.get(Vocabulary.xAxis_OP) == null)
+			this.xAxis = new Factor();
+		else
+			this.xAxis = FactorBase.fromJson((LinkedHashMap) m.get(Vocabulary.xAxis_OP));
+		if (m.get(Vocabulary.xAxisSettings_OP) == null)
+			this.xAxisSettings = new AxisSettings();
+		else
+			this.xAxisSettings = AxisSettingsBase.fromJson((LinkedHashMap) m.get(Vocabulary.xAxisSettings_OP));
+		if (m.get(Vocabulary.errors_OP) == null)
+			this.errors = new ArrayList<Factor>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.errors_OP);
+			for (Object map : list) {
+				obj_list.add(FactorBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.labels_OP) == null)
+			this.labels = new ArrayList<Factor>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.labels_OP);
+			for (Object map : list) {
+				obj_list.add(FactorBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.colors_OP) == null)
+			this.colors = new ArrayList<Factor>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.colors_OP);
+			for (Object map : list) {
+				obj_list.add(FactorBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static CubeAxisQuery createFromJson(LinkedHashMap m) {

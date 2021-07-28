@@ -2,25 +2,38 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class CategoryPaletteBase extends Palette {
 
 	public ColorList colorList;
-	public LinkedList<StringColorElement> stringColorElements;
+	public ArrayList<StringColorElement> stringColorElements;
 
 	public CategoryPaletteBase() {
 		super();
 		this.colorList = new ColorList();
-		this.stringColorElements = new LinkedList<StringColorElement>();
+		this.stringColorElements = new ArrayList<StringColorElement>();
 	}
 
 	public CategoryPaletteBase(LinkedHashMap m) {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.CategoryPalette_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.colorList_OP) == null)
+			this.colorList = new ColorList();
+		else
+			this.colorList = ColorListBase.fromJson((LinkedHashMap) m.get(Vocabulary.colorList_OP));
+		if (m.get(Vocabulary.stringColorElements_OP) == null)
+			this.stringColorElements = new ArrayList<StringColorElement>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.stringColorElements_OP);
+			for (Object map : list) {
+				obj_list.add(StringColorElementBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static CategoryPalette createFromJson(LinkedHashMap m) {

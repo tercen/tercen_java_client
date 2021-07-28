@@ -2,14 +2,14 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class StartProcessBase extends IdObject {
 
 	public String executable;
-	public LinkedList<String> arguments;
+	public ArrayList<String> arguments;
 	public Ulimits ulimits;
 	public int timeout;
 	public int pid;
@@ -18,7 +18,7 @@ public class StartProcessBase extends IdObject {
 	public StartProcessBase() {
 		super();
 		this.executable = "";
-		this.arguments = new LinkedList<String>();
+		this.arguments = new ArrayList<String>();
 		this.timeout = 0;
 		this.pid = 0;
 		this.script = "";
@@ -30,10 +30,14 @@ public class StartProcessBase extends IdObject {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.StartProcess_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.executable = (String) m.get(Vocabulary.executable_DP);
-		this.arguments = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.arguments_DP)));
+		this.arguments = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.arguments_DP)));
 		this.timeout = (int) m.get(Vocabulary.timeout_DP);
 		this.pid = (int) m.get(Vocabulary.pid_DP);
 		this.script = (String) m.get(Vocabulary.script_DP);
+		if (m.get(Vocabulary.ulimits_OP) == null)
+			this.ulimits = new Ulimits();
+		else
+			this.ulimits = UlimitsBase.fromJson((LinkedHashMap) m.get(Vocabulary.ulimits_OP));
 	}
 
 	public static StartProcess createFromJson(LinkedHashMap m) {

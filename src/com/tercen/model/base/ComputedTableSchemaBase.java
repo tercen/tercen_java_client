@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -20,6 +20,10 @@ public class ComputedTableSchemaBase extends Schema {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.ComputedTableSchema_CLASS ? m.get(Vocabulary.KIND)
 						: null);
+		if (m.get(Vocabulary.query_OP) == null)
+			this.query = new CubeQuery();
+		else
+			this.query = CubeQueryBase.fromJson((LinkedHashMap) m.get(Vocabulary.query_OP));
 	}
 
 	public static ComputedTableSchema createFromJson(LinkedHashMap m) {

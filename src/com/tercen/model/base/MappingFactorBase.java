@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -11,14 +11,14 @@ public class MappingFactorBase extends Factor {
 	public boolean isSingle;
 	public String description;
 	public String factorName;
-	public LinkedList<Factor> factors;
+	public ArrayList<Factor> factors;
 
 	public MappingFactorBase() {
 		super();
 		this.isSingle = true;
 		this.description = "";
 		this.factorName = "";
-		this.factors = new LinkedList<Factor>();
+		this.factors = new ArrayList<Factor>();
 	}
 
 	public MappingFactorBase(LinkedHashMap m) {
@@ -28,6 +28,15 @@ public class MappingFactorBase extends Factor {
 		this.isSingle = (boolean) m.get(Vocabulary.isSingle_DP);
 		this.description = (String) m.get(Vocabulary.description_DP);
 		this.factorName = (String) m.get(Vocabulary.factorName_DP);
+		if (m.get(Vocabulary.factors_OP) == null)
+			this.factors = new ArrayList<Factor>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.factors_OP);
+			for (Object map : list) {
+				obj_list.add(FactorBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static MappingFactor createFromJson(LinkedHashMap m) {

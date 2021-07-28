@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -12,7 +12,7 @@ public class OperatorRefBase extends BaseObject {
 	public String version;
 	public String operatorId;
 	public String operatorKind;
-	public LinkedList<PropertyValue> propertyValues;
+	public ArrayList<PropertyValue> propertyValues;
 	public Url url;
 
 	public OperatorRefBase() {
@@ -21,7 +21,7 @@ public class OperatorRefBase extends BaseObject {
 		this.version = "";
 		this.operatorId = "";
 		this.operatorKind = "";
-		this.propertyValues = new LinkedList<PropertyValue>();
+		this.propertyValues = new ArrayList<PropertyValue>();
 		this.url = new Url();
 	}
 
@@ -33,6 +33,19 @@ public class OperatorRefBase extends BaseObject {
 		this.version = (String) m.get(Vocabulary.version_DP);
 		this.operatorId = (String) m.get(Vocabulary.operatorId_DP);
 		this.operatorKind = (String) m.get(Vocabulary.operatorKind_DP);
+		if (m.get(Vocabulary.propertyValues_OP) == null)
+			this.propertyValues = new ArrayList<PropertyValue>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.propertyValues_OP);
+			for (Object map : list) {
+				obj_list.add(PropertyValueBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.url_OP) == null)
+			this.url = new Url();
+		else
+			this.url = UrlBase.fromJson((LinkedHashMap) m.get(Vocabulary.url_OP));
 	}
 
 	public static OperatorRef createFromJson(LinkedHashMap m) {

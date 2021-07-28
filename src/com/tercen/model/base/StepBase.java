@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -10,8 +10,8 @@ public class StepBase extends IdObject {
 
 	public String groupId;
 	public String name;
-	public LinkedList<InputPort> inputs;
-	public LinkedList<OutputPort> outputs;
+	public ArrayList<InputPort> inputs;
+	public ArrayList<OutputPort> outputs;
 	public Rectangle rectangle;
 	public StepState state;
 
@@ -19,8 +19,8 @@ public class StepBase extends IdObject {
 		super();
 		this.groupId = "";
 		this.name = "";
-		this.inputs = new LinkedList<InputPort>();
-		this.outputs = new LinkedList<OutputPort>();
+		this.inputs = new ArrayList<InputPort>();
+		this.outputs = new ArrayList<OutputPort>();
 		this.rectangle = new Rectangle();
 		this.state = new StepState();
 	}
@@ -31,6 +31,32 @@ public class StepBase extends IdObject {
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.Step_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.groupId = (String) m.get(Vocabulary.groupId_DP);
 		this.name = (String) m.get(Vocabulary.name_DP);
+		if (m.get(Vocabulary.inputs_OP) == null)
+			this.inputs = new ArrayList<InputPort>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.inputs_OP);
+			for (Object map : list) {
+				obj_list.add(InputPortBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.outputs_OP) == null)
+			this.outputs = new ArrayList<OutputPort>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.outputs_OP);
+			for (Object map : list) {
+				obj_list.add(OutputPortBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.rectangle_OP) == null)
+			this.rectangle = new Rectangle();
+		else
+			this.rectangle = RectangleBase.fromJson((LinkedHashMap) m.get(Vocabulary.rectangle_OP));
+		if (m.get(Vocabulary.state_OP) == null)
+			this.state = new StepState();
+		else
+			this.state = StepStateBase.fromJson((LinkedHashMap) m.get(Vocabulary.state_OP));
 	}
 
 	public static Step createFromJson(LinkedHashMap m) {

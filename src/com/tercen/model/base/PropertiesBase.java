@@ -2,25 +2,43 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class PropertiesBase extends BaseObject {
 
-	public LinkedList<Property> properties;
-	public LinkedList<PropertyValue> propertyValues;
+	public ArrayList<Property> properties;
+	public ArrayList<PropertyValue> propertyValues;
 
 	public PropertiesBase() {
 		super();
-		this.properties = new LinkedList<Property>();
-		this.propertyValues = new LinkedList<PropertyValue>();
+		this.properties = new ArrayList<Property>();
+		this.propertyValues = new ArrayList<PropertyValue>();
 	}
 
 	public PropertiesBase(LinkedHashMap m) {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.Properties_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.properties_OP) == null)
+			this.properties = new ArrayList<Property>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.properties_OP);
+			for (Object map : list) {
+				obj_list.add(PropertyBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.propertyValues_OP) == null)
+			this.propertyValues = new ArrayList<PropertyValue>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.propertyValues_OP);
+			for (Object map : list) {
+				obj_list.add(PropertyValueBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static Properties createFromJson(LinkedHashMap m) {

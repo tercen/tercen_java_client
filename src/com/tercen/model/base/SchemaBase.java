@@ -2,14 +2,14 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class SchemaBase extends ProjectDocument {
 
 	public int nRows;
-	public LinkedList<ColumnSchema> columns;
+	public ArrayList<ColumnSchema> columns;
 	public String dataDirectory;
 	public Relation relation;
 
@@ -17,7 +17,7 @@ public class SchemaBase extends ProjectDocument {
 		super();
 		this.nRows = 0;
 		this.dataDirectory = "";
-		this.columns = new LinkedList<ColumnSchema>();
+		this.columns = new ArrayList<ColumnSchema>();
 		this.relation = new Relation();
 	}
 
@@ -27,6 +27,19 @@ public class SchemaBase extends ProjectDocument {
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.Schema_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.nRows = (int) m.get(Vocabulary.nRows_DP);
 		this.dataDirectory = (String) m.get(Vocabulary.dataDirectory_DP);
+		if (m.get(Vocabulary.columns_OP) == null)
+			this.columns = new ArrayList<ColumnSchema>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.columns_OP);
+			for (Object map : list) {
+				obj_list.add(ColumnSchemaBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.relation_OP) == null)
+			this.relation = new Relation();
+		else
+			this.relation = RelationBase.fromJson((LinkedHashMap) m.get(Vocabulary.relation_OP));
 	}
 
 	public static Schema createFromJson(LinkedHashMap m) {

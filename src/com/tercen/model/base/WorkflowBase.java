@@ -2,20 +2,20 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class WorkflowBase extends ProjectDocument {
 
-	public LinkedList<Link> links;
-	public LinkedList<Step> steps;
+	public ArrayList<Link> links;
+	public ArrayList<Step> steps;
 	public Point offset;
 
 	public WorkflowBase() {
 		super();
-		this.links = new LinkedList<Link>();
-		this.steps = new LinkedList<Step>();
+		this.links = new ArrayList<Link>();
+		this.steps = new ArrayList<Step>();
 		this.offset = new Point();
 	}
 
@@ -23,6 +23,28 @@ public class WorkflowBase extends ProjectDocument {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.Workflow_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.links_OP) == null)
+			this.links = new ArrayList<Link>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.links_OP);
+			for (Object map : list) {
+				obj_list.add(LinkBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.steps_OP) == null)
+			this.steps = new ArrayList<Step>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.steps_OP);
+			for (Object map : list) {
+				obj_list.add(StepBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.offset_OP) == null)
+			this.offset = new Point();
+		else
+			this.offset = PointBase.fromJson((LinkedHashMap) m.get(Vocabulary.offset_OP));
 	}
 
 	public static Workflow createFromJson(LinkedHashMap m) {

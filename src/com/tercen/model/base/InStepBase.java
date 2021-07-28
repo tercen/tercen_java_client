@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -19,6 +19,10 @@ public class InStepBase extends RelationStep {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.InStep_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.groupPortPosition_OP) == null)
+			this.groupPortPosition = new Point();
+		else
+			this.groupPortPosition = PointBase.fromJson((LinkedHashMap) m.get(Vocabulary.groupPortPosition_OP));
 	}
 
 	public static InStep createFromJson(LinkedHashMap m) {

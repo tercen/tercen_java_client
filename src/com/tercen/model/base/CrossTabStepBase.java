@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -19,6 +19,10 @@ public class CrossTabStepBase extends NamespaceStep {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.CrossTabStep_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.model_OP) == null)
+			this.model = new Crosstab();
+		else
+			this.model = CrosstabBase.fromJson((LinkedHashMap) m.get(Vocabulary.model_OP));
 	}
 
 	public static CrossTabStep createFromJson(LinkedHashMap m) {

@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -10,13 +10,13 @@ public class OperatorSettingsBase extends BaseObject {
 
 	public String namespace;
 	public OperatorRef operatorRef;
-	public LinkedList<Pair> environment;
+	public ArrayList<Pair> environment;
 
 	public OperatorSettingsBase() {
 		super();
 		this.namespace = "";
 		this.operatorRef = new OperatorRef();
-		this.environment = new LinkedList<Pair>();
+		this.environment = new ArrayList<Pair>();
 	}
 
 	public OperatorSettingsBase(LinkedHashMap m) {
@@ -25,6 +25,19 @@ public class OperatorSettingsBase extends BaseObject {
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.OperatorSettings_CLASS ? m.get(Vocabulary.KIND)
 						: null);
 		this.namespace = (String) m.get(Vocabulary.namespace_DP);
+		if (m.get(Vocabulary.operatorRef_OP) == null)
+			this.operatorRef = new OperatorRef();
+		else
+			this.operatorRef = OperatorRefBase.fromJson((LinkedHashMap) m.get(Vocabulary.operatorRef_OP));
+		if (m.get(Vocabulary.environment_OP) == null)
+			this.environment = new ArrayList<Pair>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.environment_OP);
+			for (Object map : list) {
+				obj_list.add(PairBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static OperatorSettings createFromJson(LinkedHashMap m) {

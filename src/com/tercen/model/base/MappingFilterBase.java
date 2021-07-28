@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -25,6 +25,10 @@ public class MappingFilterBase extends BaseObject {
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.MappingFilter_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.name = (String) m.get(Vocabulary.name_DP);
 		this.description = (String) m.get(Vocabulary.description_DP);
+		if (m.get(Vocabulary.namedFilter_OP) == null)
+			this.namedFilter = new NamedFilter();
+		else
+			this.namedFilter = NamedFilterBase.fromJson((LinkedHashMap) m.get(Vocabulary.namedFilter_OP));
 	}
 
 	public static MappingFilter createFromJson(LinkedHashMap m) {

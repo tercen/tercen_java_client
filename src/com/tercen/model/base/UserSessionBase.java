@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -23,6 +23,18 @@ public class UserSessionBase extends BaseObject {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.UserSession_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.serverVersion_OP) == null)
+			this.serverVersion = new Version();
+		else
+			this.serverVersion = VersionBase.fromJson((LinkedHashMap) m.get(Vocabulary.serverVersion_OP));
+		if (m.get(Vocabulary.user_OP) == null)
+			this.user = new User();
+		else
+			this.user = UserBase.fromJson((LinkedHashMap) m.get(Vocabulary.user_OP));
+		if (m.get(Vocabulary.token_OP) == null)
+			this.token = new Token();
+		else
+			this.token = TokenBase.fromJson((LinkedHashMap) m.get(Vocabulary.token_OP));
 	}
 
 	public static UserSession createFromJson(LinkedHashMap m) {

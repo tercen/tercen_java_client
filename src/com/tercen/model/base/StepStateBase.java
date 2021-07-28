@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -22,6 +22,10 @@ public class StepStateBase extends BaseObject {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.StepState_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.taskId = (String) m.get(Vocabulary.taskId_DP);
+		if (m.get(Vocabulary.taskState_OP) == null)
+			this.taskState = new State();
+		else
+			this.taskState = StateBase.fromJson((LinkedHashMap) m.get(Vocabulary.taskState_OP));
 	}
 
 	public static StepState createFromJson(LinkedHashMap m) {

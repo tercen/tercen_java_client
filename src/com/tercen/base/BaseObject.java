@@ -1,15 +1,19 @@
 package com.tercen.base;
 
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class BaseObject {
 
-	public static LinkedList<LinkedHashMap> objectListToJson(LinkedList<? extends BaseObject> list) {
-		LinkedList<LinkedHashMap> jsonList = new LinkedList<LinkedHashMap>();
+	public static ArrayList<LinkedHashMap> objectListToJson(ArrayList<? extends BaseObject> list) {
+		ArrayList<LinkedHashMap> jsonList = new ArrayList<LinkedHashMap>();
 
+		if (list == null)
+			return jsonList;
 		for (BaseObject object : list) {
-			jsonList.add(object.toJson());
+			if (object != null) {
+				jsonList.add(object.toJson());
+			}
 		}
 
 		return jsonList;
@@ -26,8 +30,6 @@ public class BaseObject {
 	}
 
 	public LinkedHashMap toJson() {
-
 		return new LinkedHashMap();
 	}
-
 }

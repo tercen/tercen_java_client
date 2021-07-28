@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -10,17 +10,17 @@ public class WizardStepModelBase extends StepModel {
 
 	public String namespace;
 	public String description;
-	public LinkedList<MappingFactor> factors;
-	public LinkedList<MappingFilter> filters;
-	public LinkedList<Step> steps;
+	public ArrayList<MappingFactor> factors;
+	public ArrayList<MappingFilter> filters;
+	public ArrayList<Step> steps;
 
 	public WizardStepModelBase() {
 		super();
 		this.namespace = "";
 		this.description = "";
-		this.factors = new LinkedList<MappingFactor>();
-		this.filters = new LinkedList<MappingFilter>();
-		this.steps = new LinkedList<Step>();
+		this.factors = new ArrayList<MappingFactor>();
+		this.filters = new ArrayList<MappingFilter>();
+		this.steps = new ArrayList<Step>();
 	}
 
 	public WizardStepModelBase(LinkedHashMap m) {
@@ -29,6 +29,33 @@ public class WizardStepModelBase extends StepModel {
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.WizardStepModel_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.namespace = (String) m.get(Vocabulary.namespace_DP);
 		this.description = (String) m.get(Vocabulary.description_DP);
+		if (m.get(Vocabulary.factors_OP) == null)
+			this.factors = new ArrayList<MappingFactor>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.factors_OP);
+			for (Object map : list) {
+				obj_list.add(MappingFactorBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.filters_OP) == null)
+			this.filters = new ArrayList<MappingFilter>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.filters_OP);
+			for (Object map : list) {
+				obj_list.add(MappingFilterBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.steps_OP) == null)
+			this.steps = new ArrayList<Step>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.steps_OP);
+			for (Object map : list) {
+				obj_list.add(StepBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static WizardStepModel createFromJson(LinkedHashMap m) {

@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -30,6 +30,14 @@ public class BillingInfoBase extends BaseObject {
 		this.firstName = (String) m.get(Vocabulary.firstName_DP);
 		this.lastName = (String) m.get(Vocabulary.lastName_DP);
 		this.companyName = (String) m.get(Vocabulary.companyName_DP);
+		if (m.get(Vocabulary.taxId_OP) == null)
+			this.taxId = new TaxId();
+		else
+			this.taxId = TaxIdBase.fromJson((LinkedHashMap) m.get(Vocabulary.taxId_OP));
+		if (m.get(Vocabulary.address_OP) == null)
+			this.address = new Address();
+		else
+			this.address = AddressBase.fromJson((LinkedHashMap) m.get(Vocabulary.address_OP));
 	}
 
 	public static BillingInfo createFromJson(LinkedHashMap m) {

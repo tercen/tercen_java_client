@@ -2,25 +2,38 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class JoinStepBase extends NamespaceStep {
 
 	public JoinStepModel model;
-	public LinkedList<Attribute> rightAttributes;
+	public ArrayList<Attribute> rightAttributes;
 
 	public JoinStepBase() {
 		super();
 		this.model = new JoinStepModel();
-		this.rightAttributes = new LinkedList<Attribute>();
+		this.rightAttributes = new ArrayList<Attribute>();
 	}
 
 	public JoinStepBase(LinkedHashMap m) {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.JoinStep_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.model_OP) == null)
+			this.model = new JoinStepModel();
+		else
+			this.model = JoinStepModelBase.fromJson((LinkedHashMap) m.get(Vocabulary.model_OP));
+		if (m.get(Vocabulary.rightAttributes_OP) == null)
+			this.rightAttributes = new ArrayList<Attribute>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.rightAttributes_OP);
+			for (Object map : list) {
+				obj_list.add(AttributeBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static JoinStep createFromJson(LinkedHashMap m) {

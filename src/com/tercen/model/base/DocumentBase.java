@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -14,12 +14,12 @@ public class DocumentBase extends PersistentObject {
 	public Acl acl;
 	public Date createdDate;
 	public Date lastModifiedDate;
-	public LinkedList<Url> urls;
-	public LinkedList<String> tags;
-	public LinkedList<Pair> meta;
+	public ArrayList<Url> urls;
+	public ArrayList<String> tags;
+	public ArrayList<Pair> meta;
 	public Url url;
 	public String version;
-	public LinkedList<String> authors;
+	public ArrayList<String> authors;
 	public boolean isPublic;
 
 	public DocumentBase() {
@@ -27,15 +27,15 @@ public class DocumentBase extends PersistentObject {
 		this.description = "";
 		this.name = "";
 		this.createdBy = "";
-		this.tags = new LinkedList<String>();
+		this.tags = new ArrayList<String>();
 		this.version = "";
-		this.authors = new LinkedList<String>();
+		this.authors = new ArrayList<String>();
 		this.isPublic = true;
 		this.acl = new Acl();
 		this.createdDate = new Date();
 		this.lastModifiedDate = new Date();
-		this.urls = new LinkedList<Url>();
-		this.meta = new LinkedList<Pair>();
+		this.urls = new ArrayList<Url>();
+		this.meta = new ArrayList<Pair>();
 		this.url = new Url();
 	}
 
@@ -46,10 +46,44 @@ public class DocumentBase extends PersistentObject {
 		this.description = (String) m.get(Vocabulary.description_DP);
 		this.name = (String) m.get(Vocabulary.name_DP);
 		this.createdBy = (String) m.get(Vocabulary.createdBy_DP);
-		this.tags = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.tags_DP)));
+		this.tags = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.tags_DP)));
 		this.version = (String) m.get(Vocabulary.version_DP);
-		this.authors = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.authors_DP)));
+		this.authors = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.authors_DP)));
 		this.isPublic = (boolean) m.get(Vocabulary.isPublic_DP);
+		if (m.get(Vocabulary.acl_OP) == null)
+			this.acl = new Acl();
+		else
+			this.acl = AclBase.fromJson((LinkedHashMap) m.get(Vocabulary.acl_OP));
+		if (m.get(Vocabulary.createdDate_OP) == null)
+			this.createdDate = new Date();
+		else
+			this.createdDate = DateBase.fromJson((LinkedHashMap) m.get(Vocabulary.createdDate_OP));
+		if (m.get(Vocabulary.lastModifiedDate_OP) == null)
+			this.lastModifiedDate = new Date();
+		else
+			this.lastModifiedDate = DateBase.fromJson((LinkedHashMap) m.get(Vocabulary.lastModifiedDate_OP));
+		if (m.get(Vocabulary.urls_OP) == null)
+			this.urls = new ArrayList<Url>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.urls_OP);
+			for (Object map : list) {
+				obj_list.add(UrlBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.meta_OP) == null)
+			this.meta = new ArrayList<Pair>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.meta_OP);
+			for (Object map : list) {
+				obj_list.add(PairBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.url_OP) == null)
+			this.url = new Url();
+		else
+			this.url = UrlBase.fromJson((LinkedHashMap) m.get(Vocabulary.url_OP));
 	}
 
 	public static Document createFromJson(LinkedHashMap m) {

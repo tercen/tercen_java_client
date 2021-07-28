@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -19,6 +19,10 @@ public class TaskStateEventBase extends TaskEvent {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.TaskStateEvent_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.state_OP) == null)
+			this.state = new State();
+		else
+			this.state = StateBase.fromJson((LinkedHashMap) m.get(Vocabulary.state_OP));
 	}
 
 	public static TaskStateEvent createFromJson(LinkedHashMap m) {

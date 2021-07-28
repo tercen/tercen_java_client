@@ -2,20 +2,20 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class TablePropertiesBase extends BaseObject {
 
 	public String name;
-	public LinkedList<String> sortOrder;
+	public ArrayList<String> sortOrder;
 	public boolean ascending;
 
 	public TablePropertiesBase() {
 		super();
 		this.name = "";
-		this.sortOrder = new LinkedList<String>();
+		this.sortOrder = new ArrayList<String>();
 		this.ascending = true;
 	}
 
@@ -24,7 +24,7 @@ public class TablePropertiesBase extends BaseObject {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.TableProperties_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.name = (String) m.get(Vocabulary.name_DP);
-		this.sortOrder = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.sortOrder_DP)));
+		this.sortOrder = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.sortOrder_DP)));
 		this.ascending = (boolean) m.get(Vocabulary.ascending_DP);
 	}
 

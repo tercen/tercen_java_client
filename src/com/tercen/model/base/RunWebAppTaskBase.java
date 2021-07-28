@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -22,6 +22,10 @@ public class RunWebAppTaskBase extends ProjectTask {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.RunWebAppTask_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.operatorId = (String) m.get(Vocabulary.operatorId_DP);
+		if (m.get(Vocabulary.url_OP) == null)
+			this.url = new Url();
+		else
+			this.url = UrlBase.fromJson((LinkedHashMap) m.get(Vocabulary.url_OP));
 	}
 
 	public static RunWebAppTask createFromJson(LinkedHashMap m) {

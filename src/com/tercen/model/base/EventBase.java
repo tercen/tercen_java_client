@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -19,6 +19,10 @@ public class EventBase extends PersistentObject {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.Event_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.date_OP) == null)
+			this.date = new Date();
+		else
+			this.date = DateBase.fromJson((LinkedHashMap) m.get(Vocabulary.date_OP));
 	}
 
 	public static Event createFromJson(LinkedHashMap m) {

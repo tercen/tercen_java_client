@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -27,6 +27,26 @@ public class ProfilesBase extends BaseObject {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.Profiles_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.apiProfile_OP) == null)
+			this.apiProfile = new ApiCallProfile();
+		else
+			this.apiProfile = ApiCallProfileBase.fromJson((LinkedHashMap) m.get(Vocabulary.apiProfile_OP));
+		if (m.get(Vocabulary.tableProfile_OP) == null)
+			this.tableProfile = new TableProfile();
+		else
+			this.tableProfile = TableProfileBase.fromJson((LinkedHashMap) m.get(Vocabulary.tableProfile_OP));
+		if (m.get(Vocabulary.cpuTimeProfile_OP) == null)
+			this.cpuTimeProfile = new CpuTimeProfile();
+		else
+			this.cpuTimeProfile = CpuTimeProfileBase.fromJson((LinkedHashMap) m.get(Vocabulary.cpuTimeProfile_OP));
+		if (m.get(Vocabulary.storageProfile_OP) == null)
+			this.storageProfile = new StorageProfile();
+		else
+			this.storageProfile = StorageProfileBase.fromJson((LinkedHashMap) m.get(Vocabulary.storageProfile_OP));
+		if (m.get(Vocabulary.runProfile_OP) == null)
+			this.runProfile = new RunProfile();
+		else
+			this.runProfile = RunProfileBase.fromJson((LinkedHashMap) m.get(Vocabulary.runProfile_OP));
 	}
 
 	public static Profiles createFromJson(LinkedHashMap m) {

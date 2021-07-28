@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -10,13 +10,13 @@ public class TableBase extends BaseObject {
 
 	public int nRows;
 	public TableProperties properties;
-	public LinkedList<Column> columns;
+	public ArrayList<Column> columns;
 
 	public TableBase() {
 		super();
 		this.nRows = 0;
 		this.properties = new TableProperties();
-		this.columns = new LinkedList<Column>();
+		this.columns = new ArrayList<Column>();
 	}
 
 	public TableBase(LinkedHashMap m) {
@@ -24,6 +24,19 @@ public class TableBase extends BaseObject {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.Table_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.nRows = (int) m.get(Vocabulary.nRows_DP);
+		if (m.get(Vocabulary.properties_OP) == null)
+			this.properties = new TableProperties();
+		else
+			this.properties = TablePropertiesBase.fromJson((LinkedHashMap) m.get(Vocabulary.properties_OP));
+		if (m.get(Vocabulary.columns_OP) == null)
+			this.columns = new ArrayList<Column>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.columns_OP);
+			for (Object map : list) {
+				obj_list.add(ColumnBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static Table createFromJson(LinkedHashMap m) {

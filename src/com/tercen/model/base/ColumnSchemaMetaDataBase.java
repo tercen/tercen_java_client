@@ -2,23 +2,23 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class ColumnSchemaMetaDataBase extends BaseObject {
 
-	public LinkedList<String> sort;
+	public ArrayList<String> sort;
 	public boolean ascending;
-	public LinkedList<String> quartiles;
-	public LinkedList<Pair> properties;
+	public ArrayList<String> quartiles;
+	public ArrayList<Pair> properties;
 
 	public ColumnSchemaMetaDataBase() {
 		super();
-		this.sort = new LinkedList<String>();
+		this.sort = new ArrayList<String>();
 		this.ascending = true;
-		this.quartiles = new LinkedList<String>();
-		this.properties = new LinkedList<Pair>();
+		this.quartiles = new ArrayList<String>();
+		this.properties = new ArrayList<Pair>();
 	}
 
 	public ColumnSchemaMetaDataBase(LinkedHashMap m) {
@@ -26,9 +26,18 @@ public class ColumnSchemaMetaDataBase extends BaseObject {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.ColumnSchemaMetaData_CLASS ? m.get(Vocabulary.KIND)
 						: null);
-		this.sort = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.sort_DP)));
+		this.sort = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.sort_DP)));
 		this.ascending = (boolean) m.get(Vocabulary.ascending_DP);
-		this.quartiles = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.quartiles_DP)));
+		this.quartiles = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.quartiles_DP)));
+		if (m.get(Vocabulary.properties_OP) == null)
+			this.properties = new ArrayList<Pair>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.properties_OP);
+			for (Object map : list) {
+				obj_list.add(PairBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static ColumnSchemaMetaData createFromJson(LinkedHashMap m) {

@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -12,7 +12,7 @@ public class CSVTaskBase extends ProjectTask {
 	public String schemaId;
 	public String valueName;
 	public String variableName;
-	public LinkedList<String> gatherNames;
+	public ArrayList<String> gatherNames;
 	public Schema schema;
 	public CSVParserParam params;
 
@@ -22,7 +22,7 @@ public class CSVTaskBase extends ProjectTask {
 		this.schemaId = "";
 		this.valueName = "";
 		this.variableName = "";
-		this.gatherNames = new LinkedList<String>();
+		this.gatherNames = new ArrayList<String>();
 		this.schema = new Schema();
 		this.params = new CSVParserParam();
 	}
@@ -35,7 +35,15 @@ public class CSVTaskBase extends ProjectTask {
 		this.schemaId = (String) m.get(Vocabulary.schemaId_DP);
 		this.valueName = (String) m.get(Vocabulary.valueName_DP);
 		this.variableName = (String) m.get(Vocabulary.variableName_DP);
-		this.gatherNames = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.gatherNames_DP)));
+		this.gatherNames = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.gatherNames_DP)));
+		if (m.get(Vocabulary.schema_OP) == null)
+			this.schema = new Schema();
+		else
+			this.schema = SchemaBase.fromJson((LinkedHashMap) m.get(Vocabulary.schema_OP));
+		if (m.get(Vocabulary.params_OP) == null)
+			this.params = new CSVParserParam();
+		else
+			this.params = CSVParserParamBase.fromJson((LinkedHashMap) m.get(Vocabulary.params_OP));
 	}
 
 	public static CSVTask createFromJson(LinkedHashMap m) {

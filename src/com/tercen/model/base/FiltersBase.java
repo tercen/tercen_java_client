@@ -2,19 +2,19 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class FiltersBase extends BaseObject {
 
 	public boolean removeNaN;
-	public LinkedList<NamedFilter> namedFilters;
+	public ArrayList<NamedFilter> namedFilters;
 
 	public FiltersBase() {
 		super();
 		this.removeNaN = true;
-		this.namedFilters = new LinkedList<NamedFilter>();
+		this.namedFilters = new ArrayList<NamedFilter>();
 	}
 
 	public FiltersBase(LinkedHashMap m) {
@@ -22,6 +22,15 @@ public class FiltersBase extends BaseObject {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.Filters_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.removeNaN = (boolean) m.get(Vocabulary.removeNaN_DP);
+		if (m.get(Vocabulary.namedFilters_OP) == null)
+			this.namedFilters = new ArrayList<NamedFilter>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.namedFilters_OP);
+			for (Object map : list) {
+				obj_list.add(NamedFilterBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static Filters createFromJson(LinkedHashMap m) {

@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -10,13 +10,13 @@ public class FilterBase extends FilterTopExpr {
 
 	public String logical;
 	public boolean not;
-	public LinkedList<FilterTopExpr> filterExprs;
+	public ArrayList<FilterTopExpr> filterExprs;
 
 	public FilterBase() {
 		super();
 		this.logical = "";
 		this.not = true;
-		this.filterExprs = new LinkedList<FilterTopExpr>();
+		this.filterExprs = new ArrayList<FilterTopExpr>();
 	}
 
 	public FilterBase(LinkedHashMap m) {
@@ -25,6 +25,15 @@ public class FilterBase extends FilterTopExpr {
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.Filter_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.logical = (String) m.get(Vocabulary.logical_DP);
 		this.not = (boolean) m.get(Vocabulary.not_DP);
+		if (m.get(Vocabulary.filterExprs_OP) == null)
+			this.filterExprs = new ArrayList<FilterTopExpr>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.filterExprs_OP);
+			for (Object map : list) {
+				obj_list.add(FilterTopExprBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static Filter createFromJson(LinkedHashMap m) {

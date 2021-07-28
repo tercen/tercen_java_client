@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -21,6 +21,14 @@ public class JoinOperatorBase extends BaseObject {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.JoinOperator_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.leftPair_OP) == null)
+			this.leftPair = new ColumnPair();
+		else
+			this.leftPair = ColumnPairBase.fromJson((LinkedHashMap) m.get(Vocabulary.leftPair_OP));
+		if (m.get(Vocabulary.rightRelation_OP) == null)
+			this.rightRelation = new Relation();
+		else
+			this.rightRelation = RelationBase.fromJson((LinkedHashMap) m.get(Vocabulary.rightRelation_OP));
 	}
 
 	public static JoinOperator createFromJson(LinkedHashMap m) {

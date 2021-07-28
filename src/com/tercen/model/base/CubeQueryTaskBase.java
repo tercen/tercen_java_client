@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -10,12 +10,12 @@ public class CubeQueryTaskBase extends ProjectTask {
 
 	public CubeQuery query;
 	public boolean removeOnGC;
-	public LinkedList<String> schemaIds;
+	public ArrayList<String> schemaIds;
 
 	public CubeQueryTaskBase() {
 		super();
 		this.removeOnGC = true;
-		this.schemaIds = new LinkedList<String>();
+		this.schemaIds = new ArrayList<String>();
 		this.query = new CubeQuery();
 	}
 
@@ -24,7 +24,11 @@ public class CubeQueryTaskBase extends ProjectTask {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.CubeQueryTask_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.removeOnGC = (boolean) m.get(Vocabulary.removeOnGC_DP);
-		this.schemaIds = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.schemaIds_DP)));
+		this.schemaIds = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.schemaIds_DP)));
+		if (m.get(Vocabulary.query_OP) == null)
+			this.query = new CubeQuery();
+		else
+			this.query = CubeQueryBase.fromJson((LinkedHashMap) m.get(Vocabulary.query_OP));
 	}
 
 	public static CubeQueryTask createFromJson(LinkedHashMap m) {

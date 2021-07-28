@@ -2,19 +2,19 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class PaletteBase extends BaseObject {
 
 	public int backcolor;
-	public LinkedList<PropertyValue> properties;
+	public ArrayList<PropertyValue> properties;
 
 	public PaletteBase() {
 		super();
 		this.backcolor = 0;
-		this.properties = new LinkedList<PropertyValue>();
+		this.properties = new ArrayList<PropertyValue>();
 	}
 
 	public PaletteBase(LinkedHashMap m) {
@@ -22,6 +22,15 @@ public class PaletteBase extends BaseObject {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.Palette_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.backcolor = (int) m.get(Vocabulary.backcolor_DP);
+		if (m.get(Vocabulary.properties_OP) == null)
+			this.properties = new ArrayList<PropertyValue>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.properties_OP);
+			for (Object map : list) {
+				obj_list.add(PropertyValueBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static Palette createFromJson(LinkedHashMap m) {

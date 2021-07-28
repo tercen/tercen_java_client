@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -28,6 +28,10 @@ public class GroupStepBase extends RelationStep {
 		this.appId = (String) m.get(Vocabulary.appId_DP);
 		this.appName = (String) m.get(Vocabulary.appName_DP);
 		this.version = (String) m.get(Vocabulary.version_DP);
+		if (m.get(Vocabulary.offset_OP) == null)
+			this.offset = new Point();
+		else
+			this.offset = PointBase.fromJson((LinkedHashMap) m.get(Vocabulary.offset_OP));
 	}
 
 	public static GroupStep createFromJson(LinkedHashMap m) {

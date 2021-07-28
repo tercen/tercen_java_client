@@ -2,23 +2,23 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class GarbageTasksBase extends GarbageObject {
 
 	public String workflowId;
-	public LinkedList<String> deletedTaskIds;
-	public LinkedList<String> addedTaskIds;
-	public LinkedList<String> deletedStepIds;
+	public ArrayList<String> deletedTaskIds;
+	public ArrayList<String> addedTaskIds;
+	public ArrayList<String> deletedStepIds;
 
 	public GarbageTasksBase() {
 		super();
 		this.workflowId = "";
-		this.deletedTaskIds = new LinkedList<String>();
-		this.addedTaskIds = new LinkedList<String>();
-		this.deletedStepIds = new LinkedList<String>();
+		this.deletedTaskIds = new ArrayList<String>();
+		this.addedTaskIds = new ArrayList<String>();
+		this.deletedStepIds = new ArrayList<String>();
 	}
 
 	public GarbageTasksBase(LinkedHashMap m) {
@@ -26,10 +26,10 @@ public class GarbageTasksBase extends GarbageObject {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.GarbageTasks_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.workflowId = (String) m.get(Vocabulary.workflowId_DP);
-		this.deletedTaskIds = new LinkedList<String>(
+		this.deletedTaskIds = new ArrayList<String>(
 				(Collection<? extends String>) (m.get(Vocabulary.deletedTaskIds_DP)));
-		this.addedTaskIds = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.addedTaskIds_DP)));
-		this.deletedStepIds = new LinkedList<String>(
+		this.addedTaskIds = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.addedTaskIds_DP)));
+		this.deletedStepIds = new ArrayList<String>(
 				(Collection<? extends String>) (m.get(Vocabulary.deletedStepIds_DP)));
 	}
 

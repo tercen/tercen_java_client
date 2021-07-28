@@ -2,17 +2,17 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class EnumeratedPropertyBase extends StringProperty {
 
-	public LinkedList<String> values;
+	public ArrayList<String> values;
 
 	public EnumeratedPropertyBase() {
 		super();
-		this.values = new LinkedList<String>();
+		this.values = new ArrayList<String>();
 	}
 
 	public EnumeratedPropertyBase(LinkedHashMap m) {
@@ -20,7 +20,7 @@ public class EnumeratedPropertyBase extends StringProperty {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.EnumeratedProperty_CLASS ? m.get(Vocabulary.KIND)
 						: null);
-		this.values = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.values_DP)));
+		this.values = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.values_DP)));
 	}
 
 	public static EnumeratedProperty createFromJson(LinkedHashMap m) {

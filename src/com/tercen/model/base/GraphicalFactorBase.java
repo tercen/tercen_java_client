@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -21,6 +21,14 @@ public class GraphicalFactorBase extends BaseObject {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.GraphicalFactor_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.factor_OP) == null)
+			this.factor = new Factor();
+		else
+			this.factor = FactorBase.fromJson((LinkedHashMap) m.get(Vocabulary.factor_OP));
+		if (m.get(Vocabulary.rectangle_OP) == null)
+			this.rectangle = new Rectangle();
+		else
+			this.rectangle = RectangleBase.fromJson((LinkedHashMap) m.get(Vocabulary.rectangle_OP));
 	}
 
 	public static GraphicalFactor createFromJson(LinkedHashMap m) {

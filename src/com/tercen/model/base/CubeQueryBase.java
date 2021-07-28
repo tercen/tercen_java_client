@@ -2,16 +2,16 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class CubeQueryBase extends BaseObject {
 
 	public Relation relation;
-	public LinkedList<Factor> colColumns;
-	public LinkedList<Factor> rowColumns;
-	public LinkedList<CubeAxisQuery> axisQueries;
+	public ArrayList<Factor> colColumns;
+	public ArrayList<Factor> rowColumns;
+	public ArrayList<CubeAxisQuery> axisQueries;
 	public Filters filters;
 	public OperatorSettings operatorSettings;
 	public String qtHash;
@@ -24,9 +24,9 @@ public class CubeQueryBase extends BaseObject {
 		this.columnHash = "";
 		this.rowHash = "";
 		this.relation = new Relation();
-		this.colColumns = new LinkedList<Factor>();
-		this.rowColumns = new LinkedList<Factor>();
-		this.axisQueries = new LinkedList<CubeAxisQuery>();
+		this.colColumns = new ArrayList<Factor>();
+		this.rowColumns = new ArrayList<Factor>();
+		this.axisQueries = new ArrayList<CubeAxisQuery>();
 		this.filters = new Filters();
 		this.operatorSettings = new OperatorSettings();
 	}
@@ -38,6 +38,46 @@ public class CubeQueryBase extends BaseObject {
 		this.qtHash = (String) m.get(Vocabulary.qtHash_DP);
 		this.columnHash = (String) m.get(Vocabulary.columnHash_DP);
 		this.rowHash = (String) m.get(Vocabulary.rowHash_DP);
+		if (m.get(Vocabulary.relation_OP) == null)
+			this.relation = new Relation();
+		else
+			this.relation = RelationBase.fromJson((LinkedHashMap) m.get(Vocabulary.relation_OP));
+		if (m.get(Vocabulary.colColumns_OP) == null)
+			this.colColumns = new ArrayList<Factor>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.colColumns_OP);
+			for (Object map : list) {
+				obj_list.add(FactorBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.rowColumns_OP) == null)
+			this.rowColumns = new ArrayList<Factor>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.rowColumns_OP);
+			for (Object map : list) {
+				obj_list.add(FactorBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.axisQueries_OP) == null)
+			this.axisQueries = new ArrayList<CubeAxisQuery>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.axisQueries_OP);
+			for (Object map : list) {
+				obj_list.add(CubeAxisQueryBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.filters_OP) == null)
+			this.filters = new Filters();
+		else
+			this.filters = FiltersBase.fromJson((LinkedHashMap) m.get(Vocabulary.filters_OP));
+		if (m.get(Vocabulary.operatorSettings_OP) == null)
+			this.operatorSettings = new OperatorSettings();
+		else
+			this.operatorSettings = OperatorSettingsBase
+					.fromJson((LinkedHashMap) m.get(Vocabulary.operatorSettings_OP));
 	}
 
 	public static CubeQuery createFromJson(LinkedHashMap m) {

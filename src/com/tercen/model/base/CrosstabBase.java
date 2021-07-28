@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -30,6 +30,27 @@ public class CrosstabBase extends StepModel {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.Crosstab_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.taskId = (String) m.get(Vocabulary.taskId_DP);
+		if (m.get(Vocabulary.axis_OP) == null)
+			this.axis = new XYAxisList();
+		else
+			this.axis = XYAxisListBase.fromJson((LinkedHashMap) m.get(Vocabulary.axis_OP));
+		if (m.get(Vocabulary.columnTable_OP) == null)
+			this.columnTable = new CrosstabTable();
+		else
+			this.columnTable = CrosstabTableBase.fromJson((LinkedHashMap) m.get(Vocabulary.columnTable_OP));
+		if (m.get(Vocabulary.filters_OP) == null)
+			this.filters = new Filters();
+		else
+			this.filters = FiltersBase.fromJson((LinkedHashMap) m.get(Vocabulary.filters_OP));
+		if (m.get(Vocabulary.operatorSettings_OP) == null)
+			this.operatorSettings = new OperatorSettings();
+		else
+			this.operatorSettings = OperatorSettingsBase
+					.fromJson((LinkedHashMap) m.get(Vocabulary.operatorSettings_OP));
+		if (m.get(Vocabulary.rowTable_OP) == null)
+			this.rowTable = new CrosstabTable();
+		else
+			this.rowTable = CrosstabTableBase.fromJson((LinkedHashMap) m.get(Vocabulary.rowTable_OP));
 	}
 
 	public static Crosstab createFromJson(LinkedHashMap m) {

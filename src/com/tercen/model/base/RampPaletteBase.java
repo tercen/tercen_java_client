@@ -2,19 +2,19 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class RampPaletteBase extends Palette {
 
 	public boolean isUserDefined;
-	public LinkedList<DoubleColorElement> doubleColorElements;
+	public ArrayList<DoubleColorElement> doubleColorElements;
 
 	public RampPaletteBase() {
 		super();
 		this.isUserDefined = true;
-		this.doubleColorElements = new LinkedList<DoubleColorElement>();
+		this.doubleColorElements = new ArrayList<DoubleColorElement>();
 	}
 
 	public RampPaletteBase(LinkedHashMap m) {
@@ -22,6 +22,15 @@ public class RampPaletteBase extends Palette {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.RampPalette_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.isUserDefined = (boolean) m.get(Vocabulary.isUserDefined_DP);
+		if (m.get(Vocabulary.doubleColorElements_OP) == null)
+			this.doubleColorElements = new ArrayList<DoubleColorElement>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.doubleColorElements_OP);
+			for (Object map : list) {
+				obj_list.add(DoubleColorElementBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static RampPalette createFromJson(LinkedHashMap m) {

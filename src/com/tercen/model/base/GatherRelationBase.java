@@ -2,21 +2,21 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class GatherRelationBase extends Relation {
 
 	public Relation relation;
-	public LinkedList<String> names;
+	public ArrayList<String> names;
 	public String valueName;
 	public String variableName;
 	public String valueType;
 
 	public GatherRelationBase() {
 		super();
-		this.names = new LinkedList<String>();
+		this.names = new ArrayList<String>();
 		this.valueName = "";
 		this.variableName = "";
 		this.valueType = "";
@@ -27,10 +27,14 @@ public class GatherRelationBase extends Relation {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.GatherRelation_CLASS ? m.get(Vocabulary.KIND) : null);
-		this.names = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.names_DP)));
+		this.names = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.names_DP)));
 		this.valueName = (String) m.get(Vocabulary.valueName_DP);
 		this.variableName = (String) m.get(Vocabulary.variableName_DP);
 		this.valueType = (String) m.get(Vocabulary.valueType_DP);
+		if (m.get(Vocabulary.relation_OP) == null)
+			this.relation = new Relation();
+		else
+			this.relation = RelationBase.fromJson((LinkedHashMap) m.get(Vocabulary.relation_OP));
 	}
 
 	public static GatherRelation createFromJson(LinkedHashMap m) {

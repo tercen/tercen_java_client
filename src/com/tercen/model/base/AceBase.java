@@ -2,25 +2,43 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class AceBase extends BaseObject {
 
-	public LinkedList<Principal> principals;
-	public LinkedList<Privilege> privileges;
+	public ArrayList<Principal> principals;
+	public ArrayList<Privilege> privileges;
 
 	public AceBase() {
 		super();
-		this.principals = new LinkedList<Principal>();
-		this.privileges = new LinkedList<Privilege>();
+		this.principals = new ArrayList<Principal>();
+		this.privileges = new ArrayList<Privilege>();
 	}
 
 	public AceBase(LinkedHashMap m) {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.Ace_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.principals_OP) == null)
+			this.principals = new ArrayList<Principal>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.principals_OP);
+			for (Object map : list) {
+				obj_list.add(PrincipalBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.privileges_OP) == null)
+			this.privileges = new ArrayList<Privilege>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.privileges_OP);
+			for (Object map : list) {
+				obj_list.add(PrivilegeBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static Ace createFromJson(LinkedHashMap m) {

@@ -2,19 +2,19 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class OperatorBase extends Document {
 
-	public LinkedList<Property> properties;
+	public ArrayList<Property> properties;
 	public String longDescription;
 
 	public OperatorBase() {
 		super();
 		this.longDescription = "";
-		this.properties = new LinkedList<Property>();
+		this.properties = new ArrayList<Property>();
 	}
 
 	public OperatorBase(LinkedHashMap m) {
@@ -22,6 +22,15 @@ public class OperatorBase extends Document {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.Operator_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.longDescription = (String) m.get(Vocabulary.longDescription_DP);
+		if (m.get(Vocabulary.properties_OP) == null)
+			this.properties = new ArrayList<Property>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.properties_OP);
+			for (Object map : list) {
+				obj_list.add(PropertyBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static Operator createFromJson(LinkedHashMap m) {

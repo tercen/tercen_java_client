@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -19,6 +19,10 @@ public class TableStepModelBase extends StepModel {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.TableStepModel_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.relation_OP) == null)
+			this.relation = new Relation();
+		else
+			this.relation = RelationBase.fromJson((LinkedHashMap) m.get(Vocabulary.relation_OP));
 	}
 
 	public static TableStepModel createFromJson(LinkedHashMap m) {

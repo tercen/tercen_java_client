@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -22,6 +22,10 @@ public class ChartBase extends BaseObject {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.Chart_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.name = (String) m.get(Vocabulary.name_DP);
+		if (m.get(Vocabulary.properties_OP) == null)
+			this.properties = new Properties();
+		else
+			this.properties = PropertiesBase.fromJson((LinkedHashMap) m.get(Vocabulary.properties_OP));
 	}
 
 	public static Chart createFromJson(LinkedHashMap m) {

@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -11,7 +11,7 @@ public class PlanBase extends BaseObject {
 	public String name;
 	public String displayName;
 	public String paymentProviderPlanId;
-	public LinkedList<String> descriptions;
+	public ArrayList<String> descriptions;
 	public double price;
 
 	public PlanBase() {
@@ -19,7 +19,7 @@ public class PlanBase extends BaseObject {
 		this.name = "";
 		this.displayName = "";
 		this.paymentProviderPlanId = "";
-		this.descriptions = new LinkedList<String>();
+		this.descriptions = new ArrayList<String>();
 		this.price = 0.0;
 	}
 
@@ -30,7 +30,7 @@ public class PlanBase extends BaseObject {
 		this.name = (String) m.get(Vocabulary.name_DP);
 		this.displayName = (String) m.get(Vocabulary.displayName_DP);
 		this.paymentProviderPlanId = (String) m.get(Vocabulary.paymentProviderPlanId_DP);
-		this.descriptions = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.descriptions_DP)));
+		this.descriptions = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.descriptions_DP)));
 		this.price = (double) (m.get(Vocabulary.price_DP));
 	}
 

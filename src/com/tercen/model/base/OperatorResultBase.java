@@ -2,25 +2,43 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class OperatorResultBase extends BaseObject {
 
-	public LinkedList<Table> tables;
-	public LinkedList<JoinOperator> joinOperators;
+	public ArrayList<Table> tables;
+	public ArrayList<JoinOperator> joinOperators;
 
 	public OperatorResultBase() {
 		super();
-		this.tables = new LinkedList<Table>();
-		this.joinOperators = new LinkedList<JoinOperator>();
+		this.tables = new ArrayList<Table>();
+		this.joinOperators = new ArrayList<JoinOperator>();
 	}
 
 	public OperatorResultBase(LinkedHashMap m) {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.OperatorResult_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.tables_OP) == null)
+			this.tables = new ArrayList<Table>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.tables_OP);
+			for (Object map : list) {
+				obj_list.add(TableBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.joinOperators_OP) == null)
+			this.joinOperators = new ArrayList<JoinOperator>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.joinOperators_OP);
+			for (Object map : list) {
+				obj_list.add(JoinOperatorBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static OperatorResult createFromJson(LinkedHashMap m) {

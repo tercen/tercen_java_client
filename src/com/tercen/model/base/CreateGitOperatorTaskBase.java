@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -29,6 +29,10 @@ public class CreateGitOperatorTaskBase extends Task {
 		this.version = (String) m.get(Vocabulary.version_DP);
 		this.operatorId = (String) m.get(Vocabulary.operatorId_DP);
 		this.gitToken = (String) m.get(Vocabulary.gitToken_DP);
+		if (m.get(Vocabulary.url_OP) == null)
+			this.url = new Url();
+		else
+			this.url = UrlBase.fromJson((LinkedHashMap) m.get(Vocabulary.url_OP));
 	}
 
 	public static CreateGitOperatorTask createFromJson(LinkedHashMap m) {

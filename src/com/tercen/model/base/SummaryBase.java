@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -25,6 +25,23 @@ public class SummaryBase extends BaseObject {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.Summary_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.tableSummary_OP) == null)
+			this.tableSummary = new TableSummary();
+		else
+			this.tableSummary = TableSummaryBase.fromJson((LinkedHashMap) m.get(Vocabulary.tableSummary_OP));
+		if (m.get(Vocabulary.computedTableSummary_OP) == null)
+			this.computedTableSummary = new TableSummary();
+		else
+			this.computedTableSummary = TableSummaryBase
+					.fromJson((LinkedHashMap) m.get(Vocabulary.computedTableSummary_OP));
+		if (m.get(Vocabulary.queryTableSummary_OP) == null)
+			this.queryTableSummary = new TableSummary();
+		else
+			this.queryTableSummary = TableSummaryBase.fromJson((LinkedHashMap) m.get(Vocabulary.queryTableSummary_OP));
+		if (m.get(Vocabulary.taskSummary_OP) == null)
+			this.taskSummary = new TaskSummary();
+		else
+			this.taskSummary = TaskSummaryBase.fromJson((LinkedHashMap) m.get(Vocabulary.taskSummary_OP));
 	}
 
 	public static Summary createFromJson(LinkedHashMap m) {

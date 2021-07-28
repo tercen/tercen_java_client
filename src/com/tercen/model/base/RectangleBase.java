@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -21,6 +21,14 @@ public class RectangleBase extends BaseObject {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.Rectangle_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.extent_OP) == null)
+			this.extent = new Point();
+		else
+			this.extent = PointBase.fromJson((LinkedHashMap) m.get(Vocabulary.extent_OP));
+		if (m.get(Vocabulary.topLeft_OP) == null)
+			this.topLeft = new Point();
+		else
+			this.topLeft = PointBase.fromJson((LinkedHashMap) m.get(Vocabulary.topLeft_OP));
 	}
 
 	public static Rectangle createFromJson(LinkedHashMap m) {

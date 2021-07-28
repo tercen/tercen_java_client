@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -23,6 +23,18 @@ public class AxisBase extends BaseObject {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.Axis_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.axisExtent_OP) == null)
+			this.axisExtent = new Point();
+		else
+			this.axisExtent = PointBase.fromJson((LinkedHashMap) m.get(Vocabulary.axisExtent_OP));
+		if (m.get(Vocabulary.axisSettings_OP) == null)
+			this.axisSettings = new AxisSettings();
+		else
+			this.axisSettings = AxisSettingsBase.fromJson((LinkedHashMap) m.get(Vocabulary.axisSettings_OP));
+		if (m.get(Vocabulary.graphicalFactor_OP) == null)
+			this.graphicalFactor = new GraphicalFactor();
+		else
+			this.graphicalFactor = GraphicalFactorBase.fromJson((LinkedHashMap) m.get(Vocabulary.graphicalFactor_OP));
 	}
 
 	public static Axis createFromJson(LinkedHashMap m) {

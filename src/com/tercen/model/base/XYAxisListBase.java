@@ -2,25 +2,43 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class XYAxisListBase extends BaseObject {
 
-	public LinkedList<Rectangle> rectangleSelections;
-	public LinkedList<XYAxis> xyAxis;
+	public ArrayList<Rectangle> rectangleSelections;
+	public ArrayList<XYAxis> xyAxis;
 
 	public XYAxisListBase() {
 		super();
-		this.rectangleSelections = new LinkedList<Rectangle>();
-		this.xyAxis = new LinkedList<XYAxis>();
+		this.rectangleSelections = new ArrayList<Rectangle>();
+		this.xyAxis = new ArrayList<XYAxis>();
 	}
 
 	public XYAxisListBase(LinkedHashMap m) {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.XYAxisList_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.rectangleSelections_OP) == null)
+			this.rectangleSelections = new ArrayList<Rectangle>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.rectangleSelections_OP);
+			for (Object map : list) {
+				obj_list.add(RectangleBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.xyAxis_OP) == null)
+			this.xyAxis = new ArrayList<XYAxis>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.xyAxis_OP);
+			for (Object map : list) {
+				obj_list.add(XYAxisBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static XYAxisList createFromJson(LinkedHashMap m) {

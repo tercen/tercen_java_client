@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -21,6 +21,14 @@ public class WhereRelationBase extends Relation {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.WhereRelation_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.relation_OP) == null)
+			this.relation = new Relation();
+		else
+			this.relation = RelationBase.fromJson((LinkedHashMap) m.get(Vocabulary.relation_OP));
+		if (m.get(Vocabulary.filters_OP) == null)
+			this.filters = new Filters();
+		else
+			this.filters = FiltersBase.fromJson((LinkedHashMap) m.get(Vocabulary.filters_OP));
 	}
 
 	public static WhereRelation createFromJson(LinkedHashMap m) {

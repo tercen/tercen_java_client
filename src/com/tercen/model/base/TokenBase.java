@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -25,6 +25,10 @@ public class TokenBase extends BaseObject {
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.Token_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.userId = (String) m.get(Vocabulary.userId_DP);
 		this.token = (String) m.get(Vocabulary.token_DP);
+		if (m.get(Vocabulary.expiry_OP) == null)
+			this.expiry = new Date();
+		else
+			this.expiry = DateBase.fromJson((LinkedHashMap) m.get(Vocabulary.expiry_OP));
 	}
 
 	public static Token createFromJson(LinkedHashMap m) {

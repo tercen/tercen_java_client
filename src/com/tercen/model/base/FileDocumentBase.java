@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -25,6 +25,10 @@ public class FileDocumentBase extends ProjectDocument {
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.FileDocument_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.dataUri = (String) m.get(Vocabulary.dataUri_DP);
 		this.size = (int) m.get(Vocabulary.size_DP);
+		if (m.get(Vocabulary.metadata_OP) == null)
+			this.metadata = new FileMetadata();
+		else
+			this.metadata = FileMetadataBase.fromJson((LinkedHashMap) m.get(Vocabulary.metadata_OP));
 	}
 
 	public static FileDocument createFromJson(LinkedHashMap m) {

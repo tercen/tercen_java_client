@@ -2,18 +2,18 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class GroupByRelationBase extends Relation {
 
 	public Relation relation;
-	public LinkedList<String> group;
+	public ArrayList<String> group;
 
 	public GroupByRelationBase() {
 		super();
-		this.group = new LinkedList<String>();
+		this.group = new ArrayList<String>();
 		this.relation = new Relation();
 	}
 
@@ -21,7 +21,11 @@ public class GroupByRelationBase extends Relation {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.GroupByRelation_CLASS ? m.get(Vocabulary.KIND) : null);
-		this.group = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.group_DP)));
+		this.group = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.group_DP)));
+		if (m.get(Vocabulary.relation_OP) == null)
+			this.relation = new Relation();
+		else
+			this.relation = RelationBase.fromJson((LinkedHashMap) m.get(Vocabulary.relation_OP));
 	}
 
 	public static GroupByRelation createFromJson(LinkedHashMap m) {

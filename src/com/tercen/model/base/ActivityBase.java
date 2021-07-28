@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -16,7 +16,7 @@ public class ActivityBase extends PersistentObject {
 	public String userId;
 	public String projectName;
 	public boolean isPublic;
-	public LinkedList<Pair> properties;
+	public ArrayList<Pair> properties;
 
 	public ActivityBase() {
 		super();
@@ -28,7 +28,7 @@ public class ActivityBase extends PersistentObject {
 		this.projectName = "";
 		this.isPublic = true;
 		this.date = new Date();
-		this.properties = new LinkedList<Pair>();
+		this.properties = new ArrayList<Pair>();
 	}
 
 	public ActivityBase(LinkedHashMap m) {
@@ -42,6 +42,19 @@ public class ActivityBase extends PersistentObject {
 		this.userId = (String) m.get(Vocabulary.userId_DP);
 		this.projectName = (String) m.get(Vocabulary.projectName_DP);
 		this.isPublic = (boolean) m.get(Vocabulary.isPublic_DP);
+		if (m.get(Vocabulary.date_OP) == null)
+			this.date = new Date();
+		else
+			this.date = DateBase.fromJson((LinkedHashMap) m.get(Vocabulary.date_OP));
+		if (m.get(Vocabulary.properties_OP) == null)
+			this.properties = new ArrayList<Pair>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.properties_OP);
+			for (Object map : list) {
+				obj_list.add(PairBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static Activity createFromJson(LinkedHashMap m) {

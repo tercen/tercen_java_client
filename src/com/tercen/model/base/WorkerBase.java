@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -17,7 +17,7 @@ public class WorkerBase extends BaseObject {
 	public double memory;
 	public int nAvailableThread;
 	public double availableMemory;
-	public LinkedList<String> availableTaskTypes;
+	public ArrayList<String> availableTaskTypes;
 	public String lastDateActivity;
 	public int heartBeat;
 
@@ -32,7 +32,7 @@ public class WorkerBase extends BaseObject {
 		this.memory = 0.0;
 		this.nAvailableThread = 0;
 		this.availableMemory = 0.0;
-		this.availableTaskTypes = new LinkedList<String>();
+		this.availableTaskTypes = new ArrayList<String>();
 		this.lastDateActivity = "";
 		this.heartBeat = 0;
 	}
@@ -50,7 +50,7 @@ public class WorkerBase extends BaseObject {
 		this.memory = (double) (m.get(Vocabulary.memory_DP));
 		this.nAvailableThread = (int) m.get(Vocabulary.nAvailableThread_DP);
 		this.availableMemory = (double) (m.get(Vocabulary.availableMemory_DP));
-		this.availableTaskTypes = new LinkedList<String>(
+		this.availableTaskTypes = new ArrayList<String>(
 				(Collection<? extends String>) (m.get(Vocabulary.availableTaskTypes_DP)));
 		this.lastDateActivity = (String) m.get(Vocabulary.lastDateActivity_DP);
 		this.heartBeat = (int) m.get(Vocabulary.heartBeat_DP);

@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -11,11 +11,11 @@ public class OperatorUnitTestBase extends BaseObject {
 	public String name;
 	public String namespace;
 	public String inputDataUri;
-	public LinkedList<String> outputDataUri;
-	public LinkedList<String> columns;
-	public LinkedList<String> rows;
-	public LinkedList<String> colors;
-	public LinkedList<String> labels;
+	public ArrayList<String> outputDataUri;
+	public ArrayList<String> columns;
+	public ArrayList<String> rows;
+	public ArrayList<String> colors;
+	public ArrayList<String> labels;
 	public String yAxis;
 	public String xAxis;
 
@@ -24,11 +24,11 @@ public class OperatorUnitTestBase extends BaseObject {
 		this.name = "";
 		this.namespace = "";
 		this.inputDataUri = "";
-		this.outputDataUri = new LinkedList<String>();
-		this.columns = new LinkedList<String>();
-		this.rows = new LinkedList<String>();
-		this.colors = new LinkedList<String>();
-		this.labels = new LinkedList<String>();
+		this.outputDataUri = new ArrayList<String>();
+		this.columns = new ArrayList<String>();
+		this.rows = new ArrayList<String>();
+		this.colors = new ArrayList<String>();
+		this.labels = new ArrayList<String>();
 		this.yAxis = "";
 		this.xAxis = "";
 	}
@@ -41,12 +41,11 @@ public class OperatorUnitTestBase extends BaseObject {
 		this.name = (String) m.get(Vocabulary.name_DP);
 		this.namespace = (String) m.get(Vocabulary.namespace_DP);
 		this.inputDataUri = (String) m.get(Vocabulary.inputDataUri_DP);
-		this.outputDataUri = new LinkedList<String>(
-				(Collection<? extends String>) (m.get(Vocabulary.outputDataUri_DP)));
-		this.columns = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.columns_DP)));
-		this.rows = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.rows_DP)));
-		this.colors = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.colors_DP)));
-		this.labels = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.labels_DP)));
+		this.outputDataUri = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.outputDataUri_DP)));
+		this.columns = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.columns_DP)));
+		this.rows = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.rows_DP)));
+		this.colors = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.colors_DP)));
+		this.labels = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.labels_DP)));
 		this.yAxis = (String) m.get(Vocabulary.yAxis_DP);
 		this.xAxis = (String) m.get(Vocabulary.xAxis_DP);
 	}

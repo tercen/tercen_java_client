@@ -2,21 +2,21 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class JoinStepModelBase extends StepModel {
 
-	public LinkedList<Factor> leftFactors;
-	public LinkedList<Factor> rightFactors;
+	public ArrayList<Factor> leftFactors;
+	public ArrayList<Factor> rightFactors;
 	public String rightPrefix;
 
 	public JoinStepModelBase() {
 		super();
 		this.rightPrefix = "";
-		this.leftFactors = new LinkedList<Factor>();
-		this.rightFactors = new LinkedList<Factor>();
+		this.leftFactors = new ArrayList<Factor>();
+		this.rightFactors = new ArrayList<Factor>();
 	}
 
 	public JoinStepModelBase(LinkedHashMap m) {
@@ -24,6 +24,24 @@ public class JoinStepModelBase extends StepModel {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.JoinStepModel_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.rightPrefix = (String) m.get(Vocabulary.rightPrefix_DP);
+		if (m.get(Vocabulary.leftFactors_OP) == null)
+			this.leftFactors = new ArrayList<Factor>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.leftFactors_OP);
+			for (Object map : list) {
+				obj_list.add(FactorBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.rightFactors_OP) == null)
+			this.rightFactors = new ArrayList<Factor>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.rightFactors_OP);
+			for (Object map : list) {
+				obj_list.add(FactorBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static JoinStepModel createFromJson(LinkedHashMap m) {

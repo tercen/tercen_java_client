@@ -2,13 +2,13 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class MeltStepModelBase extends StepModel {
 
-	public LinkedList<Factor> factors;
+	public ArrayList<Factor> factors;
 	public String namespace;
 	public String selectionPattern;
 	public String factorType;
@@ -18,7 +18,7 @@ public class MeltStepModelBase extends StepModel {
 		this.namespace = "";
 		this.selectionPattern = "";
 		this.factorType = "";
-		this.factors = new LinkedList<Factor>();
+		this.factors = new ArrayList<Factor>();
 	}
 
 	public MeltStepModelBase(LinkedHashMap m) {
@@ -28,6 +28,15 @@ public class MeltStepModelBase extends StepModel {
 		this.namespace = (String) m.get(Vocabulary.namespace_DP);
 		this.selectionPattern = (String) m.get(Vocabulary.selectionPattern_DP);
 		this.factorType = (String) m.get(Vocabulary.factorType_DP);
+		if (m.get(Vocabulary.factors_OP) == null)
+			this.factors = new ArrayList<Factor>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.factors_OP);
+			for (Object map : list) {
+				obj_list.add(FactorBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static MeltStepModel createFromJson(LinkedHashMap m) {

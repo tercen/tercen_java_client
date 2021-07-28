@@ -2,7 +2,7 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
@@ -31,6 +31,10 @@ public class ColumnSchemaBase extends IdObject {
 		this.type = (String) m.get(Vocabulary.type_DP);
 		this.nRows = (int) m.get(Vocabulary.nRows_DP);
 		this.size = (int) m.get(Vocabulary.size_DP);
+		if (m.get(Vocabulary.metaData_OP) == null)
+			this.metaData = new ColumnSchemaMetaData();
+		else
+			this.metaData = ColumnSchemaMetaDataBase.fromJson((LinkedHashMap) m.get(Vocabulary.metaData_OP));
 	}
 
 	public static ColumnSchema createFromJson(LinkedHashMap m) {

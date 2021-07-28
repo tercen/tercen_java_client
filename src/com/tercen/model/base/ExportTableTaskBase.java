@@ -2,29 +2,29 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class ExportTableTaskBase extends ProjectTask {
 
 	public String exportName;
-	public LinkedList<String> schemaIds;
+	public ArrayList<String> schemaIds;
 	public String exportType;
 	public String exportToId;
 	public String exportId;
-	public LinkedList<String> namespaces;
-	public LinkedList<String> exportedSchemaIds;
+	public ArrayList<String> namespaces;
+	public ArrayList<String> exportedSchemaIds;
 
 	public ExportTableTaskBase() {
 		super();
 		this.exportName = "";
-		this.schemaIds = new LinkedList<String>();
+		this.schemaIds = new ArrayList<String>();
 		this.exportType = "";
 		this.exportToId = "";
 		this.exportId = "";
-		this.namespaces = new LinkedList<String>();
-		this.exportedSchemaIds = new LinkedList<String>();
+		this.namespaces = new ArrayList<String>();
+		this.exportedSchemaIds = new ArrayList<String>();
 	}
 
 	public ExportTableTaskBase(LinkedHashMap m) {
@@ -32,12 +32,12 @@ public class ExportTableTaskBase extends ProjectTask {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.ExportTableTask_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.exportName = (String) m.get(Vocabulary.exportName_DP);
-		this.schemaIds = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.schemaIds_DP)));
+		this.schemaIds = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.schemaIds_DP)));
 		this.exportType = (String) m.get(Vocabulary.exportType_DP);
 		this.exportToId = (String) m.get(Vocabulary.exportToId_DP);
 		this.exportId = (String) m.get(Vocabulary.exportId_DP);
-		this.namespaces = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.namespaces_DP)));
-		this.exportedSchemaIds = new LinkedList<String>(
+		this.namespaces = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.namespaces_DP)));
+		this.exportedSchemaIds = new ArrayList<String>(
 				(Collection<? extends String>) (m.get(Vocabulary.exportedSchemaIds_DP)));
 	}
 

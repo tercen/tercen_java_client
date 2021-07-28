@@ -2,27 +2,27 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class ColumnPairBase extends BaseObject {
 
-	public LinkedList<String> lColumns;
-	public LinkedList<String> rColumns;
+	public ArrayList<String> lColumns;
+	public ArrayList<String> rColumns;
 
 	public ColumnPairBase() {
 		super();
-		this.lColumns = new LinkedList<String>();
-		this.rColumns = new LinkedList<String>();
+		this.lColumns = new ArrayList<String>();
+		this.rColumns = new ArrayList<String>();
 	}
 
 	public ColumnPairBase(LinkedHashMap m) {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.ColumnPair_CLASS ? m.get(Vocabulary.KIND) : null);
-		this.lColumns = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.lColumns_DP)));
-		this.rColumns = new LinkedList<String>((Collection<? extends String>) (m.get(Vocabulary.rColumns_DP)));
+		this.lColumns = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.lColumns_DP)));
+		this.rColumns = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.rColumns_DP)));
 	}
 
 	public static ColumnPair createFromJson(LinkedHashMap m) {

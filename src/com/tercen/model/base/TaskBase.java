@@ -2,13 +2,13 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class TaskBase extends PersistentObject {
 
-	public LinkedList<Pair> environment;
+	public ArrayList<Pair> environment;
 	public State state;
 	public Date createdDate;
 	public Date lastModifiedDate;
@@ -26,7 +26,7 @@ public class TaskBase extends PersistentObject {
 		this.owner = "";
 		this.taskHash = "";
 		this.channelId = "";
-		this.environment = new LinkedList<Pair>();
+		this.environment = new ArrayList<Pair>();
 		this.state = new State();
 		this.createdDate = new Date();
 		this.lastModifiedDate = new Date();
@@ -43,6 +43,39 @@ public class TaskBase extends PersistentObject {
 		this.owner = (String) m.get(Vocabulary.owner_DP);
 		this.taskHash = (String) m.get(Vocabulary.taskHash_DP);
 		this.channelId = (String) m.get(Vocabulary.channelId_DP);
+		if (m.get(Vocabulary.environment_OP) == null)
+			this.environment = new ArrayList<Pair>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.environment_OP);
+			for (Object map : list) {
+				obj_list.add(PairBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.state_OP) == null)
+			this.state = new State();
+		else
+			this.state = StateBase.fromJson((LinkedHashMap) m.get(Vocabulary.state_OP));
+		if (m.get(Vocabulary.createdDate_OP) == null)
+			this.createdDate = new Date();
+		else
+			this.createdDate = DateBase.fromJson((LinkedHashMap) m.get(Vocabulary.createdDate_OP));
+		if (m.get(Vocabulary.lastModifiedDate_OP) == null)
+			this.lastModifiedDate = new Date();
+		else
+			this.lastModifiedDate = DateBase.fromJson((LinkedHashMap) m.get(Vocabulary.lastModifiedDate_OP));
+		if (m.get(Vocabulary.runDate_OP) == null)
+			this.runDate = new Date();
+		else
+			this.runDate = DateBase.fromJson((LinkedHashMap) m.get(Vocabulary.runDate_OP));
+		if (m.get(Vocabulary.completedDate_OP) == null)
+			this.completedDate = new Date();
+		else
+			this.completedDate = DateBase.fromJson((LinkedHashMap) m.get(Vocabulary.completedDate_OP));
+		if (m.get(Vocabulary.aclContext_OP) == null)
+			this.aclContext = new AclContext();
+		else
+			this.aclContext = AclContextBase.fromJson((LinkedHashMap) m.get(Vocabulary.aclContext_OP));
 	}
 
 	public static Task createFromJson(LinkedHashMap m) {

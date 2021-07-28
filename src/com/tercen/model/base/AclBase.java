@@ -2,19 +2,19 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class AclBase extends BaseObject {
 
 	public String owner;
-	public LinkedList<Ace> aces;
+	public ArrayList<Ace> aces;
 
 	public AclBase() {
 		super();
 		this.owner = "";
-		this.aces = new LinkedList<Ace>();
+		this.aces = new ArrayList<Ace>();
 	}
 
 	public AclBase(LinkedHashMap m) {
@@ -22,6 +22,15 @@ public class AclBase extends BaseObject {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.Acl_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.owner = (String) m.get(Vocabulary.owner_DP);
+		if (m.get(Vocabulary.aces_OP) == null)
+			this.aces = new ArrayList<Ace>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.aces_OP);
+			for (Object map : list) {
+				obj_list.add(AceBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static Acl createFromJson(LinkedHashMap m) {

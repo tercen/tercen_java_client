@@ -2,23 +2,32 @@ package com.tercen.model.base;
 
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Collection;
 
 public class UnionRelationBase extends Relation {
 
-	public LinkedList<Relation> relations;
+	public ArrayList<Relation> relations;
 
 	public UnionRelationBase() {
 		super();
-		this.relations = new LinkedList<Relation>();
+		this.relations = new ArrayList<Relation>();
 	}
 
 	public UnionRelationBase(LinkedHashMap m) {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.UnionRelation_CLASS ? m.get(Vocabulary.KIND) : null);
+		if (m.get(Vocabulary.relations_OP) == null)
+			this.relations = new ArrayList<Relation>();
+		else {
+			ArrayList obj_list = new ArrayList();
+			ArrayList list = (ArrayList) m.get(Vocabulary.relations_OP);
+			for (Object map : list) {
+				obj_list.add(RelationBase.createFromJson((LinkedHashMap) map));
+			}
+		}
 	}
 
 	public static UnionRelation createFromJson(LinkedHashMap m) {
