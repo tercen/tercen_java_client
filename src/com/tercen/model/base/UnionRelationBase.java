@@ -22,10 +22,10 @@ public class UnionRelationBase extends Relation {
 		if (m.get(Vocabulary.relations_OP) == null)
 			this.relations = new ArrayList<Relation>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.relations = new ArrayList<Relation>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.relations_OP);
 			for (Object map : list) {
-				obj_list.add(RelationBase.createFromJson((LinkedHashMap) map));
+				this.relations.add(RelationBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

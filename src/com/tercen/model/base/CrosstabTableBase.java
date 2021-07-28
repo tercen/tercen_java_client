@@ -30,19 +30,19 @@ public class CrosstabTableBase extends BaseObject {
 		if (m.get(Vocabulary.graphicalFactors_OP) == null)
 			this.graphicalFactors = new ArrayList<GraphicalFactor>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.graphicalFactors = new ArrayList<GraphicalFactor>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.graphicalFactors_OP);
 			for (Object map : list) {
-				obj_list.add(GraphicalFactorBase.createFromJson((LinkedHashMap) map));
+				this.graphicalFactors.add(GraphicalFactorBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.rectangleSelections_OP) == null)
 			this.rectangleSelections = new ArrayList<Rectangle>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.rectangleSelections = new ArrayList<Rectangle>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.rectangleSelections_OP);
 			for (Object map : list) {
-				obj_list.add(RectangleBase.createFromJson((LinkedHashMap) map));
+				this.rectangleSelections.add(RectangleBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

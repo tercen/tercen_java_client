@@ -49,10 +49,10 @@ public class ActivityBase extends PersistentObject {
 		if (m.get(Vocabulary.properties_OP) == null)
 			this.properties = new ArrayList<Pair>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.properties = new ArrayList<Pair>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.properties_OP);
 			for (Object map : list) {
-				obj_list.add(PairBase.createFromJson((LinkedHashMap) map));
+				this.properties.add(PairBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

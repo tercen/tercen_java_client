@@ -46,10 +46,10 @@ public class TaskBase extends PersistentObject {
 		if (m.get(Vocabulary.environment_OP) == null)
 			this.environment = new ArrayList<Pair>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.environment = new ArrayList<Pair>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.environment_OP);
 			for (Object map : list) {
-				obj_list.add(PairBase.createFromJson((LinkedHashMap) map));
+				this.environment.add(PairBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.state_OP) == null)

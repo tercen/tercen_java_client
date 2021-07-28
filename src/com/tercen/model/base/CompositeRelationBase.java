@@ -25,10 +25,10 @@ public class CompositeRelationBase extends Relation {
 		if (m.get(Vocabulary.joinOperators_OP) == null)
 			this.joinOperators = new ArrayList<JoinOperator>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.joinOperators = new ArrayList<JoinOperator>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.joinOperators_OP);
 			for (Object map : list) {
-				obj_list.add(JoinOperatorBase.createFromJson((LinkedHashMap) map));
+				this.joinOperators.add(JoinOperatorBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.mainRelation_OP) == null)

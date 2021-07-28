@@ -30,10 +30,10 @@ public class SchemaBase extends ProjectDocument {
 		if (m.get(Vocabulary.columns_OP) == null)
 			this.columns = new ArrayList<ColumnSchema>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.columns = new ArrayList<ColumnSchema>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.columns_OP);
 			for (Object map : list) {
-				obj_list.add(ColumnSchemaBase.createFromJson((LinkedHashMap) map));
+				this.columns.add(ColumnSchemaBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.relation_OP) == null)

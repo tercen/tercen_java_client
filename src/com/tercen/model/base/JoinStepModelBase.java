@@ -27,19 +27,19 @@ public class JoinStepModelBase extends StepModel {
 		if (m.get(Vocabulary.leftFactors_OP) == null)
 			this.leftFactors = new ArrayList<Factor>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.leftFactors = new ArrayList<Factor>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.leftFactors_OP);
 			for (Object map : list) {
-				obj_list.add(FactorBase.createFromJson((LinkedHashMap) map));
+				this.leftFactors.add(FactorBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.rightFactors_OP) == null)
 			this.rightFactors = new ArrayList<Factor>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.rightFactors = new ArrayList<Factor>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.rightFactors_OP);
 			for (Object map : list) {
-				obj_list.add(FactorBase.createFromJson((LinkedHashMap) map));
+				this.rightFactors.add(FactorBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

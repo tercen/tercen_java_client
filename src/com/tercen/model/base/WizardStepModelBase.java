@@ -32,28 +32,28 @@ public class WizardStepModelBase extends StepModel {
 		if (m.get(Vocabulary.factors_OP) == null)
 			this.factors = new ArrayList<MappingFactor>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.factors = new ArrayList<MappingFactor>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.factors_OP);
 			for (Object map : list) {
-				obj_list.add(MappingFactorBase.createFromJson((LinkedHashMap) map));
+				this.factors.add(MappingFactorBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.filters_OP) == null)
 			this.filters = new ArrayList<MappingFilter>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.filters = new ArrayList<MappingFilter>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.filters_OP);
 			for (Object map : list) {
-				obj_list.add(MappingFilterBase.createFromJson((LinkedHashMap) map));
+				this.filters.add(MappingFilterBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.steps_OP) == null)
 			this.steps = new ArrayList<Step>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.steps = new ArrayList<Step>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.steps_OP);
 			for (Object map : list) {
-				obj_list.add(StepBase.createFromJson((LinkedHashMap) map));
+				this.steps.add(StepBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

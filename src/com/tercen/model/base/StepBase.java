@@ -34,19 +34,19 @@ public class StepBase extends IdObject {
 		if (m.get(Vocabulary.inputs_OP) == null)
 			this.inputs = new ArrayList<InputPort>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.inputs = new ArrayList<InputPort>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.inputs_OP);
 			for (Object map : list) {
-				obj_list.add(InputPortBase.createFromJson((LinkedHashMap) map));
+				this.inputs.add(InputPortBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.outputs_OP) == null)
 			this.outputs = new ArrayList<OutputPort>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.outputs = new ArrayList<OutputPort>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.outputs_OP);
 			for (Object map : list) {
-				obj_list.add(OutputPortBase.createFromJson((LinkedHashMap) map));
+				this.outputs.add(OutputPortBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.rectangle_OP) == null)

@@ -24,19 +24,19 @@ public class OperatorResultBase extends BaseObject {
 		if (m.get(Vocabulary.tables_OP) == null)
 			this.tables = new ArrayList<Table>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.tables = new ArrayList<Table>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.tables_OP);
 			for (Object map : list) {
-				obj_list.add(TableBase.createFromJson((LinkedHashMap) map));
+				this.tables.add(TableBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.joinOperators_OP) == null)
 			this.joinOperators = new ArrayList<JoinOperator>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.joinOperators = new ArrayList<JoinOperator>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.joinOperators_OP);
 			for (Object map : list) {
-				obj_list.add(JoinOperatorBase.createFromJson((LinkedHashMap) map));
+				this.joinOperators.add(JoinOperatorBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

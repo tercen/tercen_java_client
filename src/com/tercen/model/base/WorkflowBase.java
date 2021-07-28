@@ -26,19 +26,19 @@ public class WorkflowBase extends ProjectDocument {
 		if (m.get(Vocabulary.links_OP) == null)
 			this.links = new ArrayList<Link>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.links = new ArrayList<Link>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.links_OP);
 			for (Object map : list) {
-				obj_list.add(LinkBase.createFromJson((LinkedHashMap) map));
+				this.links.add(LinkBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.steps_OP) == null)
 			this.steps = new ArrayList<Step>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.steps = new ArrayList<Step>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.steps_OP);
 			for (Object map : list) {
-				obj_list.add(StepBase.createFromJson((LinkedHashMap) map));
+				this.steps.add(StepBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.offset_OP) == null)

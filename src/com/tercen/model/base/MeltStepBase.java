@@ -28,10 +28,10 @@ public class MeltStepBase extends NamespaceStep {
 		if (m.get(Vocabulary.meltedAttributes_OP) == null)
 			this.meltedAttributes = new ArrayList<Attribute>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.meltedAttributes = new ArrayList<Attribute>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.meltedAttributes_OP);
 			for (Object map : list) {
-				obj_list.add(AttributeBase.createFromJson((LinkedHashMap) map));
+				this.meltedAttributes.add(AttributeBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

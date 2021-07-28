@@ -25,10 +25,10 @@ public class PaletteBase extends BaseObject {
 		if (m.get(Vocabulary.properties_OP) == null)
 			this.properties = new ArrayList<PropertyValue>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.properties = new ArrayList<PropertyValue>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.properties_OP);
 			for (Object map : list) {
-				obj_list.add(PropertyValueBase.createFromJson((LinkedHashMap) map));
+				this.properties.add(PropertyValueBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

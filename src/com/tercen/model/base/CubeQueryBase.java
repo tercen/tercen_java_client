@@ -45,28 +45,28 @@ public class CubeQueryBase extends BaseObject {
 		if (m.get(Vocabulary.colColumns_OP) == null)
 			this.colColumns = new ArrayList<Factor>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.colColumns = new ArrayList<Factor>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.colColumns_OP);
 			for (Object map : list) {
-				obj_list.add(FactorBase.createFromJson((LinkedHashMap) map));
+				this.colColumns.add(FactorBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.rowColumns_OP) == null)
 			this.rowColumns = new ArrayList<Factor>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.rowColumns = new ArrayList<Factor>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.rowColumns_OP);
 			for (Object map : list) {
-				obj_list.add(FactorBase.createFromJson((LinkedHashMap) map));
+				this.rowColumns.add(FactorBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.axisQueries_OP) == null)
 			this.axisQueries = new ArrayList<CubeAxisQuery>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.axisQueries = new ArrayList<CubeAxisQuery>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.axisQueries_OP);
 			for (Object map : list) {
-				obj_list.add(CubeAxisQueryBase.createFromJson((LinkedHashMap) map));
+				this.axisQueries.add(CubeAxisQueryBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.filters_OP) == null)

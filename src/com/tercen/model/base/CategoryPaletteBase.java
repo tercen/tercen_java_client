@@ -28,10 +28,10 @@ public class CategoryPaletteBase extends Palette {
 		if (m.get(Vocabulary.stringColorElements_OP) == null)
 			this.stringColorElements = new ArrayList<StringColorElement>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.stringColorElements = new ArrayList<StringColorElement>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.stringColorElements_OP);
 			for (Object map : list) {
-				obj_list.add(StringColorElementBase.createFromJson((LinkedHashMap) map));
+				this.stringColorElements.add(StringColorElementBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

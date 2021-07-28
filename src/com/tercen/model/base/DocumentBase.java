@@ -65,19 +65,19 @@ public class DocumentBase extends PersistentObject {
 		if (m.get(Vocabulary.urls_OP) == null)
 			this.urls = new ArrayList<Url>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.urls = new ArrayList<Url>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.urls_OP);
 			for (Object map : list) {
-				obj_list.add(UrlBase.createFromJson((LinkedHashMap) map));
+				this.urls.add(UrlBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.meta_OP) == null)
 			this.meta = new ArrayList<Pair>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.meta = new ArrayList<Pair>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.meta_OP);
 			for (Object map : list) {
-				obj_list.add(PairBase.createFromJson((LinkedHashMap) map));
+				this.meta.add(PairBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.url_OP) == null)

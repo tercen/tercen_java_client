@@ -25,10 +25,10 @@ public class OperatorBase extends Document {
 		if (m.get(Vocabulary.properties_OP) == null)
 			this.properties = new ArrayList<Property>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.properties = new ArrayList<Property>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.properties_OP);
 			for (Object map : list) {
-				obj_list.add(PropertyBase.createFromJson((LinkedHashMap) map));
+				this.properties.add(PropertyBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

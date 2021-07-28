@@ -25,10 +25,10 @@ public class AclBase extends BaseObject {
 		if (m.get(Vocabulary.aces_OP) == null)
 			this.aces = new ArrayList<Ace>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.aces = new ArrayList<Ace>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.aces_OP);
 			for (Object map : list) {
-				obj_list.add(AceBase.createFromJson((LinkedHashMap) map));
+				this.aces.add(AceBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

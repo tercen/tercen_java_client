@@ -56,28 +56,28 @@ public class CubeAxisQueryBase extends BaseObject {
 		if (m.get(Vocabulary.errors_OP) == null)
 			this.errors = new ArrayList<Factor>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.errors = new ArrayList<Factor>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.errors_OP);
 			for (Object map : list) {
-				obj_list.add(FactorBase.createFromJson((LinkedHashMap) map));
+				this.errors.add(FactorBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.labels_OP) == null)
 			this.labels = new ArrayList<Factor>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.labels = new ArrayList<Factor>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.labels_OP);
 			for (Object map : list) {
-				obj_list.add(FactorBase.createFromJson((LinkedHashMap) map));
+				this.labels.add(FactorBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.colors_OP) == null)
 			this.colors = new ArrayList<Factor>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.colors = new ArrayList<Factor>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.colors_OP);
 			for (Object map : list) {
-				obj_list.add(FactorBase.createFromJson((LinkedHashMap) map));
+				this.colors.add(FactorBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

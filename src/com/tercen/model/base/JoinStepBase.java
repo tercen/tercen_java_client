@@ -28,10 +28,10 @@ public class JoinStepBase extends NamespaceStep {
 		if (m.get(Vocabulary.rightAttributes_OP) == null)
 			this.rightAttributes = new ArrayList<Attribute>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.rightAttributes = new ArrayList<Attribute>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.rightAttributes_OP);
 			for (Object map : list) {
-				obj_list.add(AttributeBase.createFromJson((LinkedHashMap) map));
+				this.rightAttributes.add(AttributeBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

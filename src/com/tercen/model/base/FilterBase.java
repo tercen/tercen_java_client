@@ -28,10 +28,10 @@ public class FilterBase extends FilterTopExpr {
 		if (m.get(Vocabulary.filterExprs_OP) == null)
 			this.filterExprs = new ArrayList<FilterTopExpr>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.filterExprs = new ArrayList<FilterTopExpr>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.filterExprs_OP);
 			for (Object map : list) {
-				obj_list.add(FilterTopExprBase.createFromJson((LinkedHashMap) map));
+				this.filterExprs.add(FilterTopExprBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

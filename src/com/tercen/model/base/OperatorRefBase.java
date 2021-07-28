@@ -36,10 +36,10 @@ public class OperatorRefBase extends BaseObject {
 		if (m.get(Vocabulary.propertyValues_OP) == null)
 			this.propertyValues = new ArrayList<PropertyValue>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.propertyValues = new ArrayList<PropertyValue>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.propertyValues_OP);
 			for (Object map : list) {
-				obj_list.add(PropertyValueBase.createFromJson((LinkedHashMap) map));
+				this.propertyValues.add(PropertyValueBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.url_OP) == null)

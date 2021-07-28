@@ -31,10 +31,10 @@ public class MeltStepModelBase extends StepModel {
 		if (m.get(Vocabulary.factors_OP) == null)
 			this.factors = new ArrayList<Factor>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.factors = new ArrayList<Factor>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.factors_OP);
 			for (Object map : list) {
-				obj_list.add(FactorBase.createFromJson((LinkedHashMap) map));
+				this.factors.add(FactorBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

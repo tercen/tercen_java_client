@@ -24,19 +24,19 @@ public class AxisSettingsBase extends BaseObject {
 		if (m.get(Vocabulary.properties_OP) == null)
 			this.properties = new ArrayList<Property>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.properties = new ArrayList<Property>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.properties_OP);
 			for (Object map : list) {
-				obj_list.add(PropertyBase.createFromJson((LinkedHashMap) map));
+				this.properties.add(PropertyBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.propertyValues_OP) == null)
 			this.propertyValues = new ArrayList<PropertyValue>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.propertyValues = new ArrayList<PropertyValue>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.propertyValues_OP);
 			for (Object map : list) {
-				obj_list.add(PropertyValueBase.createFromJson((LinkedHashMap) map));
+				this.propertyValues.add(PropertyValueBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

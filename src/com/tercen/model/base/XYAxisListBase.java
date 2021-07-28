@@ -24,19 +24,19 @@ public class XYAxisListBase extends BaseObject {
 		if (m.get(Vocabulary.rectangleSelections_OP) == null)
 			this.rectangleSelections = new ArrayList<Rectangle>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.rectangleSelections = new ArrayList<Rectangle>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.rectangleSelections_OP);
 			for (Object map : list) {
-				obj_list.add(RectangleBase.createFromJson((LinkedHashMap) map));
+				this.rectangleSelections.add(RectangleBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.xyAxis_OP) == null)
 			this.xyAxis = new ArrayList<XYAxis>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.xyAxis = new ArrayList<XYAxis>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.xyAxis_OP);
 			for (Object map : list) {
-				obj_list.add(XYAxisBase.createFromJson((LinkedHashMap) map));
+				this.xyAxis.add(XYAxisBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

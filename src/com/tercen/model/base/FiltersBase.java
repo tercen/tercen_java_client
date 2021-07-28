@@ -25,10 +25,10 @@ public class FiltersBase extends BaseObject {
 		if (m.get(Vocabulary.namedFilters_OP) == null)
 			this.namedFilters = new ArrayList<NamedFilter>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.namedFilters = new ArrayList<NamedFilter>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.namedFilters_OP);
 			for (Object map : list) {
-				obj_list.add(NamedFilterBase.createFromJson((LinkedHashMap) map));
+				this.namedFilters.add(NamedFilterBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

@@ -25,10 +25,10 @@ public class RampPaletteBase extends Palette {
 		if (m.get(Vocabulary.doubleColorElements_OP) == null)
 			this.doubleColorElements = new ArrayList<DoubleColorElement>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.doubleColorElements = new ArrayList<DoubleColorElement>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.doubleColorElements_OP);
 			for (Object map : list) {
-				obj_list.add(DoubleColorElementBase.createFromJson((LinkedHashMap) map));
+				this.doubleColorElements.add(DoubleColorElementBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

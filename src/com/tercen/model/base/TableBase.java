@@ -31,10 +31,10 @@ public class TableBase extends BaseObject {
 		if (m.get(Vocabulary.columns_OP) == null)
 			this.columns = new ArrayList<Column>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.columns = new ArrayList<Column>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.columns_OP);
 			for (Object map : list) {
-				obj_list.add(ColumnBase.createFromJson((LinkedHashMap) map));
+				this.columns.add(ColumnBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}

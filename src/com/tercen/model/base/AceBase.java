@@ -24,19 +24,19 @@ public class AceBase extends BaseObject {
 		if (m.get(Vocabulary.principals_OP) == null)
 			this.principals = new ArrayList<Principal>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.principals = new ArrayList<Principal>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.principals_OP);
 			for (Object map : list) {
-				obj_list.add(PrincipalBase.createFromJson((LinkedHashMap) map));
+				this.principals.add(PrincipalBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 		if (m.get(Vocabulary.privileges_OP) == null)
 			this.privileges = new ArrayList<Privilege>();
 		else {
-			ArrayList obj_list = new ArrayList();
+			this.privileges = new ArrayList<Privilege>();
 			ArrayList list = (ArrayList) m.get(Vocabulary.privileges_OP);
 			for (Object map : list) {
-				obj_list.add(PrivilegeBase.createFromJson((LinkedHashMap) map));
+				this.privileges.add(PrivilegeBase.createFromJson((LinkedHashMap) map));
 			}
 		}
 	}
