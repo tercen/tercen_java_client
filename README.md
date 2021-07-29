@@ -2,6 +2,7 @@
 # Install jtson
 
 ```shell
+# must run in jston project
 mvn install:install-file \
    -Dfile=target/jtson-0.0.3-SNAPSHOT.jar \
    -DgroupId=com.tercen \
