@@ -21,7 +21,7 @@ public class TestTercenClient {
 
 		TercenClient client = new TercenClient("http://127.0.0.1:5400/");
 
-		UserSession userSession = client.userService.connect2("tercen", "admin", "admin");
+		UserSession userSession = client.userService.connect2("tercen", "test", "test");
 		System.out.println(userSession.toJson());
 		System.out.println(userSession);
 
@@ -33,7 +33,7 @@ public class TestTercenClient {
 		TercenClient client = new TercenClient("http://127.0.0.1:5400/");
 		client.userService.connect2("tercen", "test", "test");
 
-		User user = client.userService.get("admin");
+		User user = client.userService.get("test");
 
 		System.out.println(user.toJson());
 		System.out.println(user);
@@ -110,12 +110,13 @@ public class TestTercenClient {
 		FileDocument file = new FileDocument();
 		file.name = "hello.txt";
 		file.projectId = project.id;
-		byte[] bytes = "hello".getBytes();
 
-		file = client.fileService.append(file, bytes);
-		file = client.fileService.append(file, bytes);
+		file = client.fileService.append(file, "hello".getBytes());
+		file = client.fileService.append(file, "salut".getBytes());
 
-		System.out.println(file.toJson());
+		byte[] bytes = client.fileService.download(file.id);
+
+		Assert.assertArrayEquals("hellosalut".getBytes(), bytes);
 
 		client.projectService.delete(project.id, project.rev);
 
