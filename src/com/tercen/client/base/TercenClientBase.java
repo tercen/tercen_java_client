@@ -1,0 +1,86 @@
+package com.tercen.client.base;
+
+import com.tercen.service.HttpClientService;
+import com.tercen.model.impl.*;
+import com.tercen.client.impl.*;
+import com.tercen.http.AuthHttpClient;
+import java.net.URI;
+
+public class TercenClientBase {
+	public AuthHttpClient httpClient;
+	public URI tercenURI;
+	public IssueMessageService issueMessageService;
+	public WorkerService workerService;
+	public FileService fileService;
+	public GarbageCollectorService garbageCollectorService;
+	public LockService lockService;
+	public IssueService issueService;
+	public SubscriptionPlanService subscriptionPlanService;
+	public WorkerEndpointService workerEndpointService;
+	public PersistentService persistentService;
+	public ActivityService activityService;
+	public FolderService folderService;
+	public TableSchemaService tableSchemaService;
+	public TaskService taskService;
+	public UserSecretService userSecretService;
+	public EventService eventService;
+	public WorkflowService workflowService;
+	public UserService userService;
+	public ProjectDocumentService projectDocumentService;
+	public CranLibraryService cranLibraryService;
+	public TeamService teamService;
+	public ProjectService projectService;
+	public DocumentService documentService;
+	public OperatorService operatorService;
+
+	public TercenClientBase() {
+		tercenURI = URI.create("https://tercen.com/");
+		httpClient = new AuthHttpClient();
+		issueMessageService = new IssueMessageService();
+		issueMessageService.tercenClient = this;
+		workerService = new WorkerService();
+		workerService.tercenClient = this;
+		fileService = new FileService();
+		fileService.tercenClient = this;
+		garbageCollectorService = new GarbageCollectorService();
+		garbageCollectorService.tercenClient = this;
+		lockService = new LockService();
+		lockService.tercenClient = this;
+		issueService = new IssueService();
+		issueService.tercenClient = this;
+		subscriptionPlanService = new SubscriptionPlanService();
+		subscriptionPlanService.tercenClient = this;
+		workerEndpointService = new WorkerEndpointService();
+		workerEndpointService.tercenClient = this;
+		persistentService = new PersistentService();
+		persistentService.tercenClient = this;
+		activityService = new ActivityService();
+		activityService.tercenClient = this;
+		folderService = new FolderService();
+		folderService.tercenClient = this;
+		tableSchemaService = new TableSchemaService();
+		tableSchemaService.tercenClient = this;
+		taskService = new TaskService();
+		taskService.tercenClient = this;
+		userSecretService = new UserSecretService();
+		userSecretService.tercenClient = this;
+		eventService = new EventService();
+		eventService.tercenClient = this;
+		workflowService = new WorkflowService();
+		workflowService.tercenClient = this;
+		userService = new UserService();
+		userService.tercenClient = this;
+		projectDocumentService = new ProjectDocumentService();
+		projectDocumentService.tercenClient = this;
+		cranLibraryService = new CranLibraryService();
+		cranLibraryService.tercenClient = this;
+		teamService = new TeamService();
+		teamService.tercenClient = this;
+		projectService = new ProjectService();
+		projectService.tercenClient = this;
+		documentService = new DocumentService();
+		documentService.tercenClient = this;
+		operatorService = new OperatorService();
+		operatorService.tercenClient = this;
+	}
+}

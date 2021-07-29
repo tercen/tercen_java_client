@@ -8,6 +8,7 @@ public class PersistentObject extends PersistentObjectBase {
 
 	public PersistentObject() {
 		super();
+		this.isDeleted = false;
 	}
 
 	public PersistentObject(LinkedHashMap m) {

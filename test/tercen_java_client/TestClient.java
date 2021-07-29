@@ -1,19 +1,22 @@
 package tercen_java_client;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
+ 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import com.tercen.client.impl.TercenClient;
 import com.tercen.http.AuthHttpClient;
 import com.tercen.model.base.UserSessionBase;
 import com.tercen.model.impl.UserSession;
-
+import com.tercen.service.ServiceError;
+ 
 import tercen.tson.*;
 
 public class TestClient {
@@ -53,7 +56,7 @@ public class TestClient {
 	}
 	
 	@Test
-	public void test_user_connect2() throws IOException, InterruptedException, TsonError {
+	public void test_signin() throws IOException, InterruptedException, TsonError {
 		 
 		AuthHttpClient authClient = new AuthHttpClient();
 		
@@ -80,4 +83,5 @@ public class TestClient {
 		
 
 	}
+	 
 }

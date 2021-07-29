@@ -6,10 +6,10 @@ import java.net.URI;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
-import com.squareup.okhttp.RequestBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.RequestBody;
 
 public class AuthHttpClient {
 	private String authorization = "";

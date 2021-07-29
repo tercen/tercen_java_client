@@ -8,6 +8,7 @@ public class Document extends DocumentBase {
 
 	public Document() {
 		super();
+		this.isPublic = false;
 	}
 
 	public Document(LinkedHashMap m) {
