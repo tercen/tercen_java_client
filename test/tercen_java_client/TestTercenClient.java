@@ -1,27 +1,20 @@
 package tercen_java_client;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.tercen.client.impl.TercenClient;
-import com.tercen.model.impl.Column;
 import com.tercen.model.impl.FileDocument;
 import com.tercen.model.impl.Project;
-import com.tercen.model.impl.Schema;
-import com.tercen.model.impl.Table;
 import com.tercen.model.impl.User;
 import com.tercen.model.impl.UserSession;
 import com.tercen.service.ServiceError;
 
-import tercen.tson.CStringList;
-
 public class TestTercenClient {
-	
+
 	Project getTestProject(TercenClient client, String teamOrUser, String projectName) throws ServiceError {
 
 		List startKey = List.of(teamOrUser, false, "2000");
@@ -47,7 +40,7 @@ public class TestTercenClient {
 	@Test
 	public void test_user_connect() throws ServiceError {
 
-		TercenClient client = new TercenClient("http://127.0.0.1:5400/");
+		TercenClient client = new TercenClient(TestUtils.LOCALHOST_URL);
 
 		UserSession userSession = client.userService.connect2("tercen", "test", "test");
 		System.out.println(userSession.toJson());
@@ -58,7 +51,7 @@ public class TestTercenClient {
 	@Test
 	public void test_get() throws ServiceError {
 
-		TercenClient client = new TercenClient("http://127.0.0.1:5400/");
+		TercenClient client = new TercenClient(TestUtils.LOCALHOST_URL);
 		client.userService.connect2("tercen", "test", "test");
 
 		User user = client.userService.get("test");
@@ -70,7 +63,7 @@ public class TestTercenClient {
 	@Test
 	public void test_project_create() throws ServiceError {
 
-		TercenClient client = new TercenClient("http://127.0.0.1:5400/");
+		TercenClient client = new TercenClient(TestUtils.LOCALHOST_URL);
 		client.userService.connect2("tercen", "test", "test");
 
 		final Project project = getTestProject(client, "test", "java-unit-test");
@@ -82,7 +75,7 @@ public class TestTercenClient {
 	@Test
 	public void test_project_find() throws ServiceError {
 
-		TercenClient client = new TercenClient("http://127.0.0.1:5400/");
+		TercenClient client = new TercenClient(TestUtils.LOCALHOST_URL);
 
 		client.userService.connect2("tercen", "test", "test");
 
@@ -105,7 +98,7 @@ public class TestTercenClient {
 	@Test
 	public void test_file_upload() throws ServiceError {
 
-		TercenClient client = new TercenClient("http://127.0.0.1:5400/");
+		TercenClient client = new TercenClient(TestUtils.LOCALHOST_URL);
 
 		client.userService.connect2("tercen", "test", "test");
 
@@ -129,7 +122,7 @@ public class TestTercenClient {
 	@Test
 	public void test_file_append() throws ServiceError {
 
-		TercenClient client = new TercenClient("http://127.0.0.1:5400/");
+		TercenClient client = new TercenClient(TestUtils.LOCALHOST_URL);
 
 		client.userService.connect2("tercen", "test", "test");
 
@@ -150,12 +143,10 @@ public class TestTercenClient {
 
 	}
 
-	
-
 //	@Test
 //	public void test_select_table() throws ServiceError {
 //
-//		TercenClient client = new TercenClient("http://127.0.0.1:5400/");
+//		TercenClient client = new TercenClient(TestUtils.LOCALHOST_URL);
 //
 //		client.userService.connect2("tercen", "test", "test");
 // 
