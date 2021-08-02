@@ -15,28 +15,6 @@ import com.tercen.service.ServiceError;
 
 public class TestTercenClient {
 
-	Project getTestProject(TercenClient client, String teamOrUser, String projectName) throws ServiceError {
-
-		List startKey = List.of(teamOrUser, false, "2000");
-		List endKey = List.of(teamOrUser, false, "2100");
-
-		List<Project> projects = client.projectService.findByTeamAndIsPublicAndLastModifiedDate(startKey, endKey, 1000,
-				0, false, true);
-
-		Optional<Project> result = projects.stream().filter(p -> p.name.equals(projectName)).findAny();
-
-		if (result.isPresent()) {
-			return result.get();
-		}
-
-		Project new_project = new Project();
-		new_project.name = projectName;
-		new_project.acl.owner = teamOrUser;
-
-		return client.projectService.create(new_project);
-
-	}
-
 	@Test
 	public void test_user_connect() throws ServiceError {
 
@@ -66,7 +44,7 @@ public class TestTercenClient {
 		TercenClient client = new TercenClient(TestUtils.LOCALHOST_URL);
 		client.userService.connect2("tercen", "test", "test");
 
-		final Project project = getTestProject(client, "test", "java-unit-test");
+		final Project project = TestUtils.getTestProject(client, "test", "java-unit-test");
 
 		client.projectService.delete(project.id, project.rev);
 
@@ -79,7 +57,7 @@ public class TestTercenClient {
 
 		client.userService.connect2("tercen", "test", "test");
 
-		final Project project = getTestProject(client, "test", "java-unit-test");
+		final Project project = TestUtils.getTestProject(client, "test", "java-unit-test");
 
 		List startKey = List.of("test", false, "2000");
 		List endKey = List.of("test", false, "2100");
@@ -102,7 +80,7 @@ public class TestTercenClient {
 
 		client.userService.connect2("tercen", "test", "test");
 
-		final Project project = getTestProject(client, "test", "java-unit-test");
+		final Project project = TestUtils.getTestProject(client, "test", "java-unit-test");
 
 		FileDocument file = new FileDocument();
 		file.name = "hello.txt";
@@ -126,7 +104,7 @@ public class TestTercenClient {
 
 		client.userService.connect2("tercen", "test", "test");
 
-		final Project project = getTestProject(client, "test", "java-unit-test");
+		final Project project = TestUtils.getTestProject(client, "test", "java-unit-test");
 
 		FileDocument file = new FileDocument();
 		file.name = "hello.txt";
