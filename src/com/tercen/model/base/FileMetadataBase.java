@@ -1,10 +1,10 @@
 package com.tercen.model.base;
 
-import com.tercen.base.*;
-import com.tercen.model.impl.*;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Collection;
+
+import com.tercen.base.BaseObject;
+import com.tercen.model.impl.CSVFileMetadata;
+import com.tercen.model.impl.FileMetadata;
 
 public class FileMetadataBase extends BaseObject {
 
@@ -13,6 +13,8 @@ public class FileMetadataBase extends BaseObject {
 	public String contentEncoding;
 	public String contentLanguage;
 	public String md5Hash;
+	public String separator;
+	public String quote;
 
 	public FileMetadataBase() {
 		super();
@@ -21,6 +23,8 @@ public class FileMetadataBase extends BaseObject {
 		this.contentEncoding = "";
 		this.contentLanguage = "";
 		this.md5Hash = "";
+		this.separator = "";
+		this.quote = "";
 	}
 
 	public FileMetadataBase(LinkedHashMap m) {
@@ -32,6 +36,8 @@ public class FileMetadataBase extends BaseObject {
 		this.contentEncoding = (String) m.get(Vocabulary.contentEncoding_DP);
 		this.contentLanguage = (String) m.get(Vocabulary.contentLanguage_DP);
 		this.md5Hash = (String) m.get(Vocabulary.md5Hash_DP);
+		this.separator = (String) m.get(Vocabulary.separator_DP);
+		this.quote = (String) m.get(Vocabulary.quote_DP);
 	}
 
 	public static FileMetadata createFromJson(LinkedHashMap m) {
@@ -63,6 +69,8 @@ public class FileMetadataBase extends BaseObject {
 		m.put(Vocabulary.contentEncoding_DP, contentEncoding);
 		m.put(Vocabulary.contentLanguage_DP, contentLanguage);
 		m.put(Vocabulary.md5Hash_DP, md5Hash);
+		m.put(Vocabulary.separator_DP, separator);
+		m.put(Vocabulary.quote_DP, quote);
 		return m;
 	}
 }
