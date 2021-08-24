@@ -1,10 +1,10 @@
 package com.tercen.model.base;
 
+import com.tercen.base.*;
+import com.tercen.model.impl.*;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
-
-import com.tercen.base.BaseObject;
-import com.tercen.model.impl.CSVFileMetadata;
-import com.tercen.model.impl.FileMetadata;
+import java.util.Collection;
 
 public class FileMetadataBase extends BaseObject {
 
