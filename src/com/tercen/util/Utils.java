@@ -116,8 +116,8 @@ public class Utils {
 		fileDoc.acl.owner = project.acl.owner;
 		fileDoc.metadata = new CSVFileMetadata();
 		fileDoc.metadata.contentType = "text/csv";
-		fileDoc.metadata.separator = ",";
-		fileDoc.metadata.quote = "\"";
+		((CSVFileMetadata) fileDoc.metadata).separator = ",";
+		((CSVFileMetadata) fileDoc.metadata).quote = "\"";
 		fileDoc.metadata.contentEncoding = "iso-8859-1";
 		File file = new File(fullFileName);
 		byte[] bytes = FileUtils.readFileToByteArray(file);
