@@ -24,7 +24,7 @@ public class UploadData {
 		TercenClient client = new TercenClient(UploadData.LOCALHOST_URL);
 
 		try {
-			client.userService.connect2("tercen", "test", "test");
+			client.userService.connect2(DOMAIN, USERNAME, PASSWORD);
 			final Project project = Utils.getProject(client, TEAM_NAME, PROJECT_NAME);
 
 			if (type.equals("csv")) {
