@@ -25,7 +25,7 @@ public class TestClient {
 
 		AuthHttpClient authClient = new AuthHttpClient();
 
-		Response response = authClient.get("https://tercen.com", null);
+		Response response = authClient.get("http://127.0.0.1:5400", null);
 
 		Assert.assertEquals(response.code(), 200);
 
@@ -36,7 +36,7 @@ public class TestClient {
 
 		AuthHttpClient authClient = new AuthHttpClient();
 
-		Response response = authClient.post("https://tercen.com", null,
+		Response response = authClient.post("http://127.0.0.1:5400", null,
 				RequestBody.create(MediaType.parse("application/json; charset=utf-8"), "some body text"));
 
 		Assert.assertEquals(response.code(), 200);
@@ -48,7 +48,7 @@ public class TestClient {
 		 
 		AuthHttpClient authClient = new AuthHttpClient();
 
-		Response response = authClient.put("https://tercen.com", null,
+		Response response = authClient.put("http://127.0.0.1:5400", null,
 				RequestBody.create(MediaType.parse("application/json; charset=utf-8"), "some body text"));
 
 		Assert.assertEquals(response.code(), 200);

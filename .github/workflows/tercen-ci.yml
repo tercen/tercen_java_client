@@ -18,8 +18,14 @@ jobs:
           java-version: '9.0.4' # The JDK version to make available on the path.
           java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
           architecture: x64 # (x64 or x86) - defaults to x64
+      - name: Pull tercen
+        run: docker-compose pull
+      - name: Start tercen
+        run: docker-compose up -d
       - name: Publish package
         run: mvn --batch-mode deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Stop tercen
+        run: docker-compose down
 
