@@ -126,29 +126,29 @@ public class TestTercenClient {
 		client.projectService.delete(project.id, project.rev);
 	}
 
-	@Test
-	public void test_file_append() throws ServiceError {
-
-		TercenClient client = new TercenClient("http://127.0.0.1:5400/");
-
-		client.userService.connect2("tercen", "test", "test");
-
-		final Project project = getTestProject(client, "test", "java-unit-test");
-
-		FileDocument file = new FileDocument();
-		file.name = "hello.txt";
-		file.projectId = project.id;
-
-		file = client.fileService.append(file, "hello".getBytes());
-		file = client.fileService.append(file, "salut".getBytes());
-
-		byte[] bytes = client.fileService.download(file.id);
-
-		Assert.assertArrayEquals("hellosalut".getBytes(), bytes);
-
-		client.projectService.delete(project.id, project.rev);
-
-	}
+// 	@Test
+// 	public void test_file_append() throws ServiceError {
+//
+// 		TercenClient client = new TercenClient("http://127.0.0.1:5400/");
+//
+// 		client.userService.connect2("tercen", "test", "test");
+//
+// 		final Project project = getTestProject(client, "test", "java-unit-test");
+//
+// 		FileDocument file = new FileDocument();
+// 		file.name = "hello.txt";
+// 		file.projectId = project.id;
+//
+// 		file = client.fileService.append(file, "hello".getBytes());
+// 		file = client.fileService.append(file, "salut".getBytes());
+//
+// 		byte[] bytes = client.fileService.download(file.id);
+//
+// 		Assert.assertArrayEquals("hellosalut".getBytes(), bytes);
+//
+// 		client.projectService.delete(project.id, project.rev);
+//
+// 	}
 
 	
 
