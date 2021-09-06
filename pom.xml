@@ -11,10 +11,6 @@
 			<url>https://jitpack.io</url>
 		</repository>
 		<repository>
-			<id>jitpack.io</id>
-			<url>https://jitpack.io</url>
-		</repository>
-		<repository>
 			<id>github</id>
 			<url>https://maven.pkg.github.com/tercen/*</url>
 		</repository>
