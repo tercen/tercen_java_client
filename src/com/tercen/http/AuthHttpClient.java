@@ -10,6 +10,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.RequestBody;
+import java.util.concurrent.TimeUnit;
 
 public class AuthHttpClient {
 	private String authorization = "";
@@ -17,7 +18,10 @@ public class AuthHttpClient {
 
 	public AuthHttpClient() {
 		authorization = "";
-		client = new OkHttpClient();
+		client = new OkHttpClient().newBuilder()
+             .writeTimeout(0, TimeUnit.MILLISECONDS)
+             .readTimeout(0, TimeUnit.MILLISECONDS)
+             .build();
 	}
 
 	public String getAuthorization() {
