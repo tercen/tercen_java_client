@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>tercen_java_client</groupId>
 	<artifactId>tercen_java_client</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2</version>
 	<repositories>
 		<repository>
 			<id>jitpack.io</id>
@@ -16,7 +16,7 @@
 		<dependency>
 			<groupId>com.tercen</groupId>
 			<artifactId>jtson</artifactId>
-			<version>0.0.4</version>
+			<version>0.0.4-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
@@ -63,4 +63,19 @@
 
 		</plugins>
 	</build>
+	<distributionManagement>
+		<!--		<snapshotRepository>-->
+		<!--			<id>ossrh</id>-->
+		<!--			<url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
+		<!--		</snapshotRepository>-->
+		<!--		<repository>-->
+		<!--			<id>ossrh</id>-->
+		<!--			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
+		<!--		</repository>-->
+		<repository>
+			<id>github</id>
+			<name>GitHub Packages</name>
+			<url>https://maven.pkg.github.com/tercen/tercen_java_client</url>
+		</repository>
+	</distributionManagement>
 </project>
