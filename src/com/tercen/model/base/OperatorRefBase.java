@@ -1,4 +1,5 @@
 package com.tercen.model.base;
+
 import com.tercen.base.*;
 import com.tercen.model.impl.*;
 import java.util.ArrayList;
@@ -7,62 +8,73 @@ import java.util.Collection;
 
 public class OperatorRefBase extends BaseObject {
 
-public String name;
-public String version;
-public String operatorId;
-public String operatorKind;
-public ArrayList<PropertyValue> propertyValues;
-public Url url;
+	public String name;
+	public String version;
+	public String operatorId;
+	public String operatorKind;
+	public ArrayList<PropertyValue> propertyValues;
+	public Url url;
 
-public OperatorRefBase(){
-super();
-this.name = "";
-this.version = "";
-this.operatorId = "";
-this.operatorKind = "";
-this.propertyValues = new ArrayList<PropertyValue>();
-this.url = new Url();
-}
+	public OperatorRefBase() {
+		super();
+		this.name = "";
+		this.version = "";
+		this.operatorId = "";
+		this.operatorKind = "";
+		this.propertyValues = new ArrayList<PropertyValue>();
+		this.url = new Url();
+	}
 
-public OperatorRefBase(LinkedHashMap m){
-super(m);
-this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String)m.get(Vocabulary.SUBKIND)   : (String)(m.get(Vocabulary.KIND) != Vocabulary.OperatorRef_CLASS ? m.get(Vocabulary.KIND) : null);
-this.name = (String)m.get(Vocabulary.name_DP) ;
-this.version = (String)m.get(Vocabulary.version_DP) ;
-this.operatorId = (String)m.get(Vocabulary.operatorId_DP) ;
-this.operatorKind = (String)m.get(Vocabulary.operatorKind_DP) ;
-if (m.get(Vocabulary.propertyValues_OP) == null)
-this.propertyValues = new ArrayList<PropertyValue>();
-else {
-this.propertyValues = new ArrayList<PropertyValue>();
-ArrayList list = (ArrayList)m.get(Vocabulary.propertyValues_OP);
-for (Object map : list) {
-this.propertyValues.add(PropertyValueBase.createFromJson((LinkedHashMap)map));
-}
-}
-if (m.get(Vocabulary.url_OP) == null) this.url = new Url();
-else this.url = UrlBase.fromJson((LinkedHashMap)m.get(Vocabulary.url_OP) );
-}
+	public OperatorRefBase(LinkedHashMap m) {
+		super(m);
+		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
+				: (String) (m.get(Vocabulary.KIND) != Vocabulary.OperatorRef_CLASS ? m.get(Vocabulary.KIND) : null);
+		this.name = (String) m.get(Vocabulary.name_DP);
+		this.version = (String) m.get(Vocabulary.version_DP);
+		this.operatorId = (String) m.get(Vocabulary.operatorId_DP);
+		this.operatorKind = (String) m.get(Vocabulary.operatorKind_DP);
+		if (m.get(Vocabulary.propertyValues_OP) == null)
+			this.propertyValues = new ArrayList<PropertyValue>();
+		else {
+			this.propertyValues = new ArrayList<PropertyValue>();
+			ArrayList list = (ArrayList) m.get(Vocabulary.propertyValues_OP);
+			for (Object map : list) {
+				this.propertyValues.add(PropertyValueBase.createFromJson((LinkedHashMap) map));
+			}
+		}
+		if (m.get(Vocabulary.url_OP) == null)
+			this.url = new Url();
+		else
+			this.url = UrlBase.fromJson((LinkedHashMap) m.get(Vocabulary.url_OP));
+	}
 
-public static OperatorRef createFromJson(LinkedHashMap m) {return OperatorRefBase.fromJson(m);} 
-public static OperatorRef fromJson(LinkedHashMap m) {String kind = (String)m.get(Vocabulary.KIND);
-switch (kind) {
-case Vocabulary.OperatorRef_CLASS :
-return new OperatorRef(m);
-default : throw new IllegalArgumentException(  "bad kind : " + kind +" for class OperatorRef in fromJson constructor");
-}
-}
+	public static OperatorRef createFromJson(LinkedHashMap m) {
+		return OperatorRefBase.fromJson(m);
+	}
 
-public LinkedHashMap toJson() {
-LinkedHashMap m = super.toJson();m.put(Vocabulary.KIND, Vocabulary.OperatorRef_CLASS);
-if (this.subKind != null && this.subKind != Vocabulary.OperatorRef_CLASS) m.put(Vocabulary.SUBKIND, this.subKind);
-else m.remove(Vocabulary.SUBKIND);
-m.put(Vocabulary.name_DP, name);
-m.put(Vocabulary.version_DP, version);
-m.put(Vocabulary.operatorId_DP, operatorId);
-m.put(Vocabulary.operatorKind_DP, operatorKind);
-m.put(Vocabulary.propertyValues_OP, BaseObject.objectListToJson(propertyValues));
-m.put(Vocabulary.url_OP, url == null ? null : url.toJson()) ;
-return m;
-}
+	public static OperatorRef fromJson(LinkedHashMap m) {
+		String kind = (String) m.get(Vocabulary.KIND);
+		switch (kind) {
+		case Vocabulary.OperatorRef_CLASS:
+			return new OperatorRef(m);
+		default:
+			throw new IllegalArgumentException("bad kind : " + kind + " for class OperatorRef in fromJson constructor");
+		}
+	}
+
+	public LinkedHashMap toJson() {
+		LinkedHashMap m = super.toJson();
+		m.put(Vocabulary.KIND, Vocabulary.OperatorRef_CLASS);
+		if (this.subKind != null && this.subKind != Vocabulary.OperatorRef_CLASS)
+			m.put(Vocabulary.SUBKIND, this.subKind);
+		else
+			m.remove(Vocabulary.SUBKIND);
+		m.put(Vocabulary.name_DP, name);
+		m.put(Vocabulary.version_DP, version);
+		m.put(Vocabulary.operatorId_DP, operatorId);
+		m.put(Vocabulary.operatorKind_DP, operatorKind);
+		m.put(Vocabulary.propertyValues_OP, BaseObject.objectListToJson(propertyValues));
+		m.put(Vocabulary.url_OP, url == null ? null : url.toJson());
+		return m;
+	}
 }

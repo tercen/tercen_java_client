@@ -18,10 +18,8 @@ public class AuthHttpClient {
 
 	public AuthHttpClient() {
 		authorization = "";
-		client = new OkHttpClient().newBuilder()
-             .writeTimeout(0, TimeUnit.MILLISECONDS)
-             .readTimeout(0, TimeUnit.MILLISECONDS)
-             .build();
+		client = new OkHttpClient().newBuilder().writeTimeout(0, TimeUnit.MILLISECONDS)
+				.readTimeout(0, TimeUnit.MILLISECONDS).build();
 	}
 
 	public String getAuthorization() {

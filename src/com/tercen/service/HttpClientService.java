@@ -153,7 +153,8 @@ public class HttpClientService<T extends PersistentObjectBase> {
 
 	}
 
-	public URI addQueryParameters(URI uri, LinkedHashMap<String, String> queryParameters) throws UnsupportedEncodingException {
+	public URI addQueryParameters(URI uri, LinkedHashMap<String, String> queryParameters)
+			throws UnsupportedEncodingException {
 		if (queryParameters.isEmpty()) {
 			return uri;
 		}

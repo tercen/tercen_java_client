@@ -87,16 +87,16 @@ public class FileService extends FileServiceBase {
 	}
 
 	public byte[] download(String fileDocumentId) throws ServiceError {
- 
+
 		byte[] answer = null;
 
 		try {
-			
+
 			LinkedHashMap<String, String> params = new LinkedHashMap<String, String>();
 			params.put("fileDocumentId", fileDocumentId);
-			
+
 			String json = new ObjectMapper().writeValueAsString(params);
-			
+
 			LinkedHashMap<String, String> queryParameters = new LinkedHashMap<String, String>();
 			queryParameters.put("params", json);
 
@@ -104,7 +104,7 @@ public class FileService extends FileServiceBase {
 					queryParameters).toString();
 
 			Response response = tercenClient.httpClient.get(uri, null);
-			
+
 			if (response.code() != 200) {
 				onResponseError(response);
 			} else {
