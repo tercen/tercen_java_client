@@ -62,10 +62,38 @@ public class DocumentServiceBase extends HttpClientService<Document> {
 		return findStartKeys("findOperatorByCreatedDate", startKey, endKey, limit, skip, descending, useFactory);
 	}
 
+	public SearchResult search(String query, int limit, boolean useFactory, String bookmark) throws ServiceError {
+		SearchResult answer = null;
+		Response response = null;
+		try {
+			URI uri = URI.create("api/v1/d" + "/" + "search");
+			LinkedHashMap params = new LinkedHashMap();
+			params.put("query", query);
+			params.put("limit", limit);
+			params.put("useFactory", useFactory);
+			params.put("bookmark", bookmark);
+			response = tercenClient.httpClient.post(getServiceUri(uri).toString(), null,
+					RequestBody.create(MediaType.parse("application/tson"), jtson.encodeTSON(params)));
+			if (response.code() != 200) {
+				onResponseError(response);
+			} else {
+
+				answer = SearchResultBase.fromJson((LinkedHashMap) jtson.decodeTSON(response.body().bytes()));
+			}
+		} catch (Exception e) {
+			onError(e);
+		} finally {
+			if (response != null) {
+				response.close();
+			}
+		}
+		return answer;
+	}
+
 	public List<Operator> getTercenOperatorLibrary(int offset, int limit) throws ServiceError {
 		List<Operator> answer = null;
+		Response response = null;
 		try {
-			Response response;
 			URI uri = URI.create("api/v1/d" + "/" + "getTercenOperatorLibrary");
 			LinkedHashMap params = new LinkedHashMap();
 			params.put("offset", offset);
@@ -80,14 +108,18 @@ public class DocumentServiceBase extends HttpClientService<Document> {
 			}
 		} catch (Exception e) {
 			onError(e);
+		} finally {
+			if (response != null) {
+				response.close();
+			}
 		}
 		return answer;
 	}
 
 	public List<Document> getTercenWorkflowLibrary(int offset, int limit) throws ServiceError {
 		List<Document> answer = null;
+		Response response = null;
 		try {
-			Response response;
 			URI uri = URI.create("api/v1/d" + "/" + "getTercenWorkflowLibrary");
 			LinkedHashMap params = new LinkedHashMap();
 			params.put("offset", offset);
@@ -102,14 +134,18 @@ public class DocumentServiceBase extends HttpClientService<Document> {
 			}
 		} catch (Exception e) {
 			onError(e);
+		} finally {
+			if (response != null) {
+				response.close();
+			}
 		}
 		return answer;
 	}
 
 	public List<Document> getTercenAppLibrary(int offset, int limit) throws ServiceError {
 		List<Document> answer = null;
+		Response response = null;
 		try {
-			Response response;
 			URI uri = URI.create("api/v1/d" + "/" + "getTercenAppLibrary");
 			LinkedHashMap params = new LinkedHashMap();
 			params.put("offset", offset);
@@ -124,6 +160,10 @@ public class DocumentServiceBase extends HttpClientService<Document> {
 			}
 		} catch (Exception e) {
 			onError(e);
+		} finally {
+			if (response != null) {
+				response.close();
+			}
 		}
 		return answer;
 	}
