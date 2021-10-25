@@ -79,11 +79,11 @@ public class HttpClientService<T extends PersistentObjectBase> {
 			}
 		} catch (IOException | TsonError e) {
 			onError(e);
-		}  finally {
-          			if (response != null) {
-          				response.close();
-          			}
-          		}
+		} finally {
+			if (response != null) {
+				response.close();
+			}
+		}
 
 		return answer;
 	}
@@ -91,11 +91,12 @@ public class HttpClientService<T extends PersistentObjectBase> {
 	public T create(T object) throws ServiceError {
 
 		T answer = null;
+		Response response = null;
 
 		try {
 			String uri = getServiceUri(getBaseUri()).toString();
 
-			Response response = tercenClient.httpClient.put(uri, null,
+			response = tercenClient.httpClient.put(uri, null,
 					RequestBody.create(MediaType.parse("application/tson"), jtson.encodeTSON(object.toJson())));
 
 			if (response.code() != 200) {
@@ -107,11 +108,11 @@ public class HttpClientService<T extends PersistentObjectBase> {
 			}
 		} catch (IOException | TsonError | InterruptedException e) {
 			onError(e);
-		}  finally {
-          			if (response != null) {
-          				response.close();
-          			}
-          		}
+		} finally {
+			if (response != null) {
+				response.close();
+			}
+		}
 
 		return answer;
 	}
@@ -119,11 +120,12 @@ public class HttpClientService<T extends PersistentObjectBase> {
 	public String update(T object) throws ServiceError {
 
 		String rev = null;
+		Response response = null;
 
 		try {
 			String uri = getServiceUri(getBaseUri()).toString();
 
-			Response response = tercenClient.httpClient.post(uri, null,
+			response = tercenClient.httpClient.post(uri, null,
 					RequestBody.create(MediaType.parse("application/tson"), jtson.encodeTSON(object.toJson())));
 
 			if (response.code() != 200) {
@@ -137,11 +139,11 @@ public class HttpClientService<T extends PersistentObjectBase> {
 			}
 		} catch (IOException | TsonError | InterruptedException e) {
 			onError(e);
-		}  finally {
-          			if (response != null) {
-          				response.close();
-          			}
-          		}
+		} finally {
+			if (response != null) {
+				response.close();
+			}
+		}
 
 		return rev;
 	}
@@ -151,21 +153,23 @@ public class HttpClientService<T extends PersistentObjectBase> {
 		queryParameters.put("id", id);
 		queryParameters.put("rev", rev);
 
+		Response response = null;
+
 		try {
 			String uri = addQueryParameters(getServiceUri(getBaseUri()), queryParameters).toString();
 
-			Response response = tercenClient.httpClient.delete(uri, null);
+			response = tercenClient.httpClient.delete(uri, null);
 
 			if (response.code() != 200) {
 				onResponseError(response);
 			}
 		} catch (IOException e) {
 			onError(e);
-		}  finally {
-          			if (response != null) {
-          				response.close();
-          			}
-          		}
+		} finally {
+			if (response != null) {
+				response.close();
+			}
+		}
 
 	}
 
@@ -200,7 +204,7 @@ public class HttpClientService<T extends PersistentObjectBase> {
 		LinkedHashMap<String, String> queryParameters = new LinkedHashMap<String, String>();
 		queryParameters.put("useFactory", "" + useFactory);
 
-        Response response = null;
+		Response response = null;
 
 		try {
 			String uri = addQueryParameters(URI.create(getServiceUri(getBaseUri()).toString() + "/" + viewName),
@@ -229,11 +233,11 @@ public class HttpClientService<T extends PersistentObjectBase> {
 
 		} catch (IOException | InterruptedException | TsonError e) {
 			onError(e);
-		}  finally {
-          			if (response != null) {
-          				response.close();
-          			}
-          		}
+		} finally {
+			if (response != null) {
+				response.close();
+			}
+		}
 
 		return answer;
 
@@ -244,7 +248,7 @@ public class HttpClientService<T extends PersistentObjectBase> {
 		LinkedHashMap<String, String> queryParameters = new LinkedHashMap<String, String>();
 		queryParameters.put("useFactory", "" + useFactory);
 
-Response response = null;
+		Response response = null;
 
 		try {
 			String uri = addQueryParameters(URI.create(getServiceUri(getBaseUri()).toString() + "/" + viewName),
@@ -266,12 +270,11 @@ Response response = null;
 
 		} catch (IOException | InterruptedException | TsonError e) {
 			onError(e);
-		}   finally {
-                    			if (response != null) {
-                    				response.close();
-                    			}
-                    		}
-
+		} finally {
+			if (response != null) {
+				response.close();
+			}
+		}
 
 		return answer;
 
