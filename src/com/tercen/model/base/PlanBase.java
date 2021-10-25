@@ -30,7 +30,11 @@ public class PlanBase extends BaseObject {
 		this.name = (String) m.get(Vocabulary.name_DP);
 		this.displayName = (String) m.get(Vocabulary.displayName_DP);
 		this.paymentProviderPlanId = (String) m.get(Vocabulary.paymentProviderPlanId_DP);
-		this.descriptions = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.descriptions_DP)));
+		if (m.get(Vocabulary.descriptions_DP) == null)
+			this.descriptions = new ArrayList<String>();
+		else
+			this.descriptions = new ArrayList<String>(
+					(Collection<? extends String>) (m.get(Vocabulary.descriptions_DP)));
 		this.price = (double) (m.get(Vocabulary.price_DP));
 	}
 

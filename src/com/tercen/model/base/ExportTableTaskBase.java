@@ -32,13 +32,22 @@ public class ExportTableTaskBase extends ProjectTask {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.ExportTableTask_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.exportName = (String) m.get(Vocabulary.exportName_DP);
-		this.schemaIds = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.schemaIds_DP)));
+		if (m.get(Vocabulary.schemaIds_DP) == null)
+			this.schemaIds = new ArrayList<String>();
+		else
+			this.schemaIds = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.schemaIds_DP)));
 		this.exportType = (String) m.get(Vocabulary.exportType_DP);
 		this.exportToId = (String) m.get(Vocabulary.exportToId_DP);
 		this.exportId = (String) m.get(Vocabulary.exportId_DP);
-		this.namespaces = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.namespaces_DP)));
-		this.exportedSchemaIds = new ArrayList<String>(
-				(Collection<? extends String>) (m.get(Vocabulary.exportedSchemaIds_DP)));
+		if (m.get(Vocabulary.namespaces_DP) == null)
+			this.namespaces = new ArrayList<String>();
+		else
+			this.namespaces = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.namespaces_DP)));
+		if (m.get(Vocabulary.exportedSchemaIds_DP) == null)
+			this.exportedSchemaIds = new ArrayList<String>();
+		else
+			this.exportedSchemaIds = new ArrayList<String>(
+					(Collection<? extends String>) (m.get(Vocabulary.exportedSchemaIds_DP)));
 	}
 
 	public static ExportTableTask createFromJson(LinkedHashMap m) {

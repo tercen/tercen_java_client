@@ -35,7 +35,10 @@ public class CSVTaskBase extends ProjectTask {
 		this.schemaId = (String) m.get(Vocabulary.schemaId_DP);
 		this.valueName = (String) m.get(Vocabulary.valueName_DP);
 		this.variableName = (String) m.get(Vocabulary.variableName_DP);
-		this.gatherNames = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.gatherNames_DP)));
+		if (m.get(Vocabulary.gatherNames_DP) == null)
+			this.gatherNames = new ArrayList<String>();
+		else
+			this.gatherNames = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.gatherNames_DP)));
 		if (m.get(Vocabulary.schema_OP) == null)
 			this.schema = new Schema();
 		else

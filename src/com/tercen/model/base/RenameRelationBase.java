@@ -23,8 +23,14 @@ public class RenameRelationBase extends Relation {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.RenameRelation_CLASS ? m.get(Vocabulary.KIND) : null);
-		this.inNames = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.inNames_DP)));
-		this.outNames = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.outNames_DP)));
+		if (m.get(Vocabulary.inNames_DP) == null)
+			this.inNames = new ArrayList<String>();
+		else
+			this.inNames = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.inNames_DP)));
+		if (m.get(Vocabulary.outNames_DP) == null)
+			this.outNames = new ArrayList<String>();
+		else
+			this.outNames = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.outNames_DP)));
 		if (m.get(Vocabulary.relation_OP) == null)
 			this.relation = new Relation();
 		else

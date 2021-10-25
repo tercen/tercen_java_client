@@ -50,8 +50,11 @@ public class WorkerBase extends BaseObject {
 		this.memory = (double) (m.get(Vocabulary.memory_DP));
 		this.nAvailableThread = (int) m.get(Vocabulary.nAvailableThread_DP);
 		this.availableMemory = (double) (m.get(Vocabulary.availableMemory_DP));
-		this.availableTaskTypes = new ArrayList<String>(
-				(Collection<? extends String>) (m.get(Vocabulary.availableTaskTypes_DP)));
+		if (m.get(Vocabulary.availableTaskTypes_DP) == null)
+			this.availableTaskTypes = new ArrayList<String>();
+		else
+			this.availableTaskTypes = new ArrayList<String>(
+					(Collection<? extends String>) (m.get(Vocabulary.availableTaskTypes_DP)));
 		this.lastDateActivity = (String) m.get(Vocabulary.lastDateActivity_DP);
 		this.heartBeat = (int) m.get(Vocabulary.heartBeat_DP);
 	}

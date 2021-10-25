@@ -27,7 +27,10 @@ public class GatherRelationBase extends Relation {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.GatherRelation_CLASS ? m.get(Vocabulary.KIND) : null);
-		this.names = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.names_DP)));
+		if (m.get(Vocabulary.names_DP) == null)
+			this.names = new ArrayList<String>();
+		else
+			this.names = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.names_DP)));
 		this.valueName = (String) m.get(Vocabulary.valueName_DP);
 		this.variableName = (String) m.get(Vocabulary.variableName_DP);
 		this.valueType = (String) m.get(Vocabulary.valueType_DP);

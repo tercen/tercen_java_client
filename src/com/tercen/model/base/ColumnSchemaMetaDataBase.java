@@ -26,9 +26,15 @@ public class ColumnSchemaMetaDataBase extends BaseObject {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.ColumnSchemaMetaData_CLASS ? m.get(Vocabulary.KIND)
 						: null);
-		this.sort = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.sort_DP)));
+		if (m.get(Vocabulary.sort_DP) == null)
+			this.sort = new ArrayList<String>();
+		else
+			this.sort = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.sort_DP)));
 		this.ascending = (boolean) m.get(Vocabulary.ascending_DP);
-		this.quartiles = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.quartiles_DP)));
+		if (m.get(Vocabulary.quartiles_DP) == null)
+			this.quartiles = new ArrayList<String>();
+		else
+			this.quartiles = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.quartiles_DP)));
 		if (m.get(Vocabulary.properties_OP) == null)
 			this.properties = new ArrayList<Pair>();
 		else {

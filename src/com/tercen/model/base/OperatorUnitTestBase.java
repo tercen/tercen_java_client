@@ -48,13 +48,33 @@ public class OperatorUnitTestBase extends BaseObject {
 						: null);
 		this.name = (String) m.get(Vocabulary.name_DP);
 		this.namespace = (String) m.get(Vocabulary.namespace_DP);
-		this.inputFileUris = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.inputFileUris_DP)));
+		if (m.get(Vocabulary.inputFileUris_DP) == null)
+			this.inputFileUris = new ArrayList<String>();
+		else
+			this.inputFileUris = new ArrayList<String>(
+					(Collection<? extends String>) (m.get(Vocabulary.inputFileUris_DP)));
 		this.inputDataUri = (String) m.get(Vocabulary.inputDataUri_DP);
-		this.outputDataUri = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.outputDataUri_DP)));
-		this.columns = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.columns_DP)));
-		this.rows = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.rows_DP)));
-		this.colors = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.colors_DP)));
-		this.labels = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.labels_DP)));
+		if (m.get(Vocabulary.outputDataUri_DP) == null)
+			this.outputDataUri = new ArrayList<String>();
+		else
+			this.outputDataUri = new ArrayList<String>(
+					(Collection<? extends String>) (m.get(Vocabulary.outputDataUri_DP)));
+		if (m.get(Vocabulary.columns_DP) == null)
+			this.columns = new ArrayList<String>();
+		else
+			this.columns = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.columns_DP)));
+		if (m.get(Vocabulary.rows_DP) == null)
+			this.rows = new ArrayList<String>();
+		else
+			this.rows = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.rows_DP)));
+		if (m.get(Vocabulary.colors_DP) == null)
+			this.colors = new ArrayList<String>();
+		else
+			this.colors = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.colors_DP)));
+		if (m.get(Vocabulary.labels_DP) == null)
+			this.labels = new ArrayList<String>();
+		else
+			this.labels = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.labels_DP)));
 		this.yAxis = (String) m.get(Vocabulary.yAxis_DP);
 		this.xAxis = (String) m.get(Vocabulary.xAxis_DP);
 		this.absTol = (double) (m.get(Vocabulary.absTol_DP));

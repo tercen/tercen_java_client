@@ -26,11 +26,21 @@ public class GarbageTasksBase extends GarbageObject {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.GarbageTasks_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.workflowId = (String) m.get(Vocabulary.workflowId_DP);
-		this.deletedTaskIds = new ArrayList<String>(
-				(Collection<? extends String>) (m.get(Vocabulary.deletedTaskIds_DP)));
-		this.addedTaskIds = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.addedTaskIds_DP)));
-		this.deletedStepIds = new ArrayList<String>(
-				(Collection<? extends String>) (m.get(Vocabulary.deletedStepIds_DP)));
+		if (m.get(Vocabulary.deletedTaskIds_DP) == null)
+			this.deletedTaskIds = new ArrayList<String>();
+		else
+			this.deletedTaskIds = new ArrayList<String>(
+					(Collection<? extends String>) (m.get(Vocabulary.deletedTaskIds_DP)));
+		if (m.get(Vocabulary.addedTaskIds_DP) == null)
+			this.addedTaskIds = new ArrayList<String>();
+		else
+			this.addedTaskIds = new ArrayList<String>(
+					(Collection<? extends String>) (m.get(Vocabulary.addedTaskIds_DP)));
+		if (m.get(Vocabulary.deletedStepIds_DP) == null)
+			this.deletedStepIds = new ArrayList<String>();
+		else
+			this.deletedStepIds = new ArrayList<String>(
+					(Collection<? extends String>) (m.get(Vocabulary.deletedStepIds_DP)));
 	}
 
 	public static GarbageTasks createFromJson(LinkedHashMap m) {

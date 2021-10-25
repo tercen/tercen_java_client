@@ -24,7 +24,10 @@ public class CubeQueryTaskBase extends ProjectTask {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.CubeQueryTask_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.removeOnGC = (boolean) m.get(Vocabulary.removeOnGC_DP);
-		this.schemaIds = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.schemaIds_DP)));
+		if (m.get(Vocabulary.schemaIds_DP) == null)
+			this.schemaIds = new ArrayList<String>();
+		else
+			this.schemaIds = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.schemaIds_DP)));
 		if (m.get(Vocabulary.query_OP) == null)
 			this.query = new CubeQuery();
 		else

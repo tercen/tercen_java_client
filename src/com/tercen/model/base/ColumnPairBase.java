@@ -21,8 +21,14 @@ public class ColumnPairBase extends BaseObject {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.ColumnPair_CLASS ? m.get(Vocabulary.KIND) : null);
-		this.lColumns = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.lColumns_DP)));
-		this.rColumns = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.rColumns_DP)));
+		if (m.get(Vocabulary.lColumns_DP) == null)
+			this.lColumns = new ArrayList<String>();
+		else
+			this.lColumns = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.lColumns_DP)));
+		if (m.get(Vocabulary.rColumns_DP) == null)
+			this.rColumns = new ArrayList<String>();
+		else
+			this.rColumns = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.rColumns_DP)));
 	}
 
 	public static ColumnPair createFromJson(LinkedHashMap m) {

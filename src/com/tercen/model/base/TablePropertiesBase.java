@@ -24,7 +24,10 @@ public class TablePropertiesBase extends BaseObject {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.TableProperties_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.name = (String) m.get(Vocabulary.name_DP);
-		this.sortOrder = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.sortOrder_DP)));
+		if (m.get(Vocabulary.sortOrder_DP) == null)
+			this.sortOrder = new ArrayList<String>();
+		else
+			this.sortOrder = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.sortOrder_DP)));
 		this.ascending = (boolean) m.get(Vocabulary.ascending_DP);
 	}
 

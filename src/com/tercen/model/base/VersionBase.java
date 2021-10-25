@@ -37,7 +37,10 @@ public class VersionBase extends BaseObject {
 		this.tag = (String) m.get(Vocabulary.tag_DP);
 		this.date = (String) m.get(Vocabulary.date_DP);
 		this.commit = (String) m.get(Vocabulary.commit_DP);
-		this.features = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.features_DP)));
+		if (m.get(Vocabulary.features_DP) == null)
+			this.features = new ArrayList<String>();
+		else
+			this.features = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.features_DP)));
 	}
 
 	public static Version createFromJson(LinkedHashMap m) {

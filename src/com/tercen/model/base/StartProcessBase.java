@@ -30,7 +30,10 @@ public class StartProcessBase extends IdObject {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.StartProcess_CLASS ? m.get(Vocabulary.KIND) : null);
 		this.executable = (String) m.get(Vocabulary.executable_DP);
-		this.arguments = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.arguments_DP)));
+		if (m.get(Vocabulary.arguments_DP) == null)
+			this.arguments = new ArrayList<String>();
+		else
+			this.arguments = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.arguments_DP)));
 		this.timeout = (int) m.get(Vocabulary.timeout_DP);
 		this.pid = (int) m.get(Vocabulary.pid_DP);
 		this.script = (String) m.get(Vocabulary.script_DP);

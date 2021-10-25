@@ -21,7 +21,10 @@ public class GroupByRelationBase extends Relation {
 		super(m);
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.GroupByRelation_CLASS ? m.get(Vocabulary.KIND) : null);
-		this.group = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.group_DP)));
+		if (m.get(Vocabulary.group_DP) == null)
+			this.group = new ArrayList<String>();
+		else
+			this.group = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.group_DP)));
 		if (m.get(Vocabulary.relation_OP) == null)
 			this.relation = new Relation();
 		else

@@ -38,7 +38,10 @@ public class UserBase extends Document {
 		this.email = (String) m.get(Vocabulary.email_DP);
 		this.isValidated = (boolean) m.get(Vocabulary.isValidated_DP);
 		this.domain = (String) m.get(Vocabulary.domain_DP);
-		this.roles = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.roles_DP)));
+		if (m.get(Vocabulary.roles_DP) == null)
+			this.roles = new ArrayList<String>();
+		else
+			this.roles = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.roles_DP)));
 		this.invitedByUsername = (String) m.get(Vocabulary.invitedByUsername_DP);
 		this.invitationCounts = (int) m.get(Vocabulary.invitationCounts_DP);
 		this.maxInvitation = (int) m.get(Vocabulary.maxInvitation_DP);

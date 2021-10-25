@@ -46,9 +46,15 @@ public class DocumentBase extends PersistentObject {
 		this.description = (String) m.get(Vocabulary.description_DP);
 		this.name = (String) m.get(Vocabulary.name_DP);
 		this.createdBy = (String) m.get(Vocabulary.createdBy_DP);
-		this.tags = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.tags_DP)));
+		if (m.get(Vocabulary.tags_DP) == null)
+			this.tags = new ArrayList<String>();
+		else
+			this.tags = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.tags_DP)));
 		this.version = (String) m.get(Vocabulary.version_DP);
-		this.authors = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.authors_DP)));
+		if (m.get(Vocabulary.authors_DP) == null)
+			this.authors = new ArrayList<String>();
+		else
+			this.authors = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.authors_DP)));
 		this.isPublic = (boolean) m.get(Vocabulary.isPublic_DP);
 		if (m.get(Vocabulary.acl_OP) == null)
 			this.acl = new Acl();

@@ -20,7 +20,10 @@ public class EnumeratedPropertyBase extends StringProperty {
 		this.subKind = m.get(Vocabulary.SUBKIND) != null ? (String) m.get(Vocabulary.SUBKIND)
 				: (String) (m.get(Vocabulary.KIND) != Vocabulary.EnumeratedProperty_CLASS ? m.get(Vocabulary.KIND)
 						: null);
-		this.values = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.values_DP)));
+		if (m.get(Vocabulary.values_DP) == null)
+			this.values = new ArrayList<String>();
+		else
+			this.values = new ArrayList<String>((Collection<? extends String>) (m.get(Vocabulary.values_DP)));
 	}
 
 	public static EnumeratedProperty createFromJson(LinkedHashMap m) {
