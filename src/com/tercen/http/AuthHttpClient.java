@@ -9,6 +9,8 @@ import java.util.Map.Entry;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.WebSocket;
+import okhttp3.WebSocketListener;
 import okhttp3.RequestBody;
 import java.util.concurrent.TimeUnit;
 
@@ -114,6 +116,21 @@ public class AuthHttpClient {
 		Response response = client.newCall(request).execute();
 
 		return response;
+	}
+	
+	public WebSocket createWebsocket(String url, WebSocketListener listener) throws IOException {
+
+		Request.Builder builder = new Request.Builder().get().url(url);
+
+		if (!authorization.isEmpty()) {
+			builder.header("authorization", authorization);
+		}
+
+		Request request = builder.build();
+
+		WebSocket webSocket = client.newWebSocket(request, listener);
+
+		return webSocket;
 	}
 
 }
