@@ -22,6 +22,7 @@ public class AuthHttpClient {
 		authorization = "";
 		client = new OkHttpClient().newBuilder().writeTimeout(0, TimeUnit.MILLISECONDS)
 				.readTimeout(0, TimeUnit.MILLISECONDS).build();
+		client.connectionPool().evictAll();
 	}
 
 	public String getAuthorization() {
