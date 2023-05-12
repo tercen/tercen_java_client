@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tercen.client.base.FileServiceBase;
@@ -28,7 +30,7 @@ public class FileService extends FileServiceBase {
 		try {
 			String uri = getServiceUri(getBaseUri()).toString() + "/upload";
 
-			String json = new ObjectMapper().writeValueAsString(List.of(file.toJson()));
+			String json = new ObjectMapper().writeValueAsString(Stream.of(file.toJson()).collect(Collectors.toList()));	
 
 			MultipartBody.Builder builder = new MultipartBody.Builder()
 					.addPart(MultipartBody.create(MediaType.parse("application/json"), json))
@@ -64,7 +66,7 @@ public class FileService extends FileServiceBase {
 		try {
 			String uri = getServiceUri(getBaseUri()).toString() + "/append";
 
-			String json = new ObjectMapper().writeValueAsString(List.of(file.toJson()));
+			String json = new ObjectMapper().writeValueAsString(Stream.of(file.toJson()).collect(Collectors.toList()));   
 
 			MultipartBody.Builder builder = new MultipartBody.Builder()
 					.addPart(MultipartBody.create(MediaType.parse("application/json"), json))

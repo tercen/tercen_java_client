@@ -1,31 +1,26 @@
 package tercen_java_client;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.tercen.client.impl.TercenClient;
-import com.tercen.model.impl.Column;
 import com.tercen.model.impl.FileDocument;
 import com.tercen.model.impl.Project;
-import com.tercen.model.impl.Schema;
-import com.tercen.model.impl.Table;
 import com.tercen.model.impl.User;
 import com.tercen.model.impl.UserSession;
 import com.tercen.service.ServiceError;
-
-import tercen.tson.CStringList;
 
 public class TestTercenClient {
 	
 	Project getTestProject(TercenClient client, String teamOrUser, String projectName) throws ServiceError {
 
-		List startKey = List.of(teamOrUser, false, "2000");
-		List endKey = List.of(teamOrUser, false, "2100");
+		List startKey = Stream.of(teamOrUser, false, "2100").collect(Collectors.toList());
+		List endKey = Stream.of(teamOrUser, false, "2100").collect(Collectors.toList());
 
 		List<Project> projects = client.projectService.findByTeamAndIsPublicAndLastModifiedDate(startKey, endKey, 1000,
 				0, false, true);
@@ -88,8 +83,8 @@ public class TestTercenClient {
 
 		final Project project = getTestProject(client, "test", "java-unit-test");
 
-		List startKey = List.of("test", false, "2000");
-		List endKey = List.of("test", false, "2100");
+		List startKey = Stream.of("test", false, "2000").collect(Collectors.toList());
+		List endKey = Stream.of("test", false, "2100").collect(Collectors.toList());
 
 		List<Project> projects = client.projectService.findByTeamAndIsPublicAndLastModifiedDate(startKey, endKey, 1000,
 				0, false, true);
