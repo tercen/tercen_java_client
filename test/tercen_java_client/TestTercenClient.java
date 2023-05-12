@@ -19,7 +19,7 @@ public class TestTercenClient {
 	
 	Project getTestProject(TercenClient client, String teamOrUser, String projectName) throws ServiceError {
 
-		List startKey = Stream.of(teamOrUser, false, "2100").collect(Collectors.toList());
+		List startKey = Stream.of(teamOrUser, false, "2000").collect(Collectors.toList());
 		List endKey = Stream.of(teamOrUser, false, "2100").collect(Collectors.toList());
 
 		List<Project> projects = client.projectService.findByTeamAndIsPublicAndLastModifiedDate(startKey, endKey, 1000,
